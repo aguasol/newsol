@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "370568661419",
+    "project_id": "aguasol-ee2de",
+    "storage_bucket": "aguasol-ee2de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370568661419:android:2ce7cea94a66ffe375eaee",
+        "android_client_info": {
+          "package_name": "com.aguasol.appsol_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370568661419-4hsl3jotlhcrbosil6g85p7ed194paq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aguasol.appsol_final",
+            "certificate_hash": "219a4d9a626e75800b179e28739d1bacc485c558"
+          }
+        },
+        {
+          "client_id": "370568661419-ga30aq9u67fhms6jac4gdq7c2p5platk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvqpM6OrE-6XxHjpkgMQsZYjJMpLN9GDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370568661419-ga30aq9u67fhms6jac4gdq7c2p5platk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "370568661419-ga30aq9u67fhms6jac4gdq7c2p5platk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aguasol.appsol_final"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
