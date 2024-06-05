@@ -138,23 +138,68 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                   children: [
                     Container(
                       padding: EdgeInsets.all(8),
-                      color: Colors.green,
-                      width: 300,
-                      height: 300,
+                      // color: Colors.green,
+                      width: MediaQuery.of(context).size.width / 1.4,
+                      height: MediaQuery.of(context).size.height / 2,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
                           Container(
-                            color: Colors.grey,
-                            width: 370,
-                            height: 70,
-                          ),
+                              padding: EdgeInsets.all(6),
+                              margin: EdgeInsets.only(right: 0),
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                            
+                                Colors.yellow,
+                                Colors.yellow.shade300,
+                                Colors.yellow.shade100,
+                                Colors.white
+                              ])),
+                              width: 370,
+                              height: 70,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      RichText(
+                                          text: TextSpan(
+                                              text:
+                                                  '\n Sabías\n que\n puedes \n ganar\n dinero con ...',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          20,
+                                                  color: Color.fromARGB(255, 91, 175, 93)))),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5,
+                                        child: Image.asset(
+                                            "lib/imagenes/logo_aguasol_splash.png"),
+                                      )
+                                    ],
+                                  ),
+                                  Text("Descubre \ncomo hacerlo !",
+                                  style: TextStyle(fontSize: 50,fontWeight: FontWeight.w300),),
+                                  
+                                ],
+                              )),
                           Container(
+                            margin: EdgeInsets.only(right: 20),
+                            padding: EdgeInsets.all(3),
                             color: Colors.blue,
                             width: 370,
                             height: 70,
                           ),
                           Container(
+                            margin: EdgeInsets.only(right: 20),
                             color: Colors.teal,
                             width: 370,
                             height: 70,
@@ -163,27 +208,34 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                       ),
                     ),
                     Positioned(
-                      top:-MediaQuery.of(context).size.width/9,
-                      left: -MediaQuery.of(context).size.width/9,
+                      top: -MediaQuery.of(context).size.width / 3.5,
+                      left: -MediaQuery.of(context).size.width / 9,
                       child: Container(
-                       // color: Colors.yellow,
-                        width: MediaQuery.of(context).size.width/5,
-                        height: MediaQuery.of(context).size.height/5,
+                        // color: Colors.yellow,
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height / 5,
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
                     Positioned(
-                      top:MediaQuery.of(context).size.width/9,
-                      right: -MediaQuery.of(context).size.width/9,
+                      top: MediaQuery.of(context).size.width,
+                      right: MediaQuery.of(context).size.width / 3.5,
                       child: Container(
-                        decoration: BoxDecoration(
-                          color:Colors.yellow,
-                          borderRadius:BorderRadius.circular(75)
-                        ),
-                        width: MediaQuery.of(context).size.width/5,
-                        height: MediaQuery.of(context).size.height/9,
-                        child: Lottie.asset("lib/imagenes/manita_left.json")),
-                    )
+                          decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(85)),
+                          width: MediaQuery.of(context).size.width / 7,
+                          height: MediaQuery.of(context).size.height / 15,
+                          child: Lottie.asset("lib/imagenes/manita_left.json")),
+                    ),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height/3,
+                      left: 50,
+                      child: Container(
+                                    height:300,
+                                    width: 300,
+                                    child: Lottie.asset("lib/imagenes/ganaste.json"),
+                                  ))
                   ],
                 ));
           });
