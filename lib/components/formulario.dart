@@ -66,14 +66,14 @@ class _FormuState extends State<Formu> {
             "fecha_nacimiento": fechaFormateada,
             "fecha_creacion_cuenta": fechaActual,
             "sexo": sexo,
-            "direccion_empresa": "",
+            "direccion_empresa": "NA",
             "suscripcion": "Básico",
-            "nombre_empresa": "",
-            "frecuencia": "",
+            "nombre_empresa": "NA",
+            "frecuencia": "NA",
             "quiereretirar": false,
-            "medio_retiro": "",
-            "banco_retiro": "",
-            "numero_cuenta": ""
+            "medio_retiro": "NA",
+            "banco_retiro": "NA",
+            "numero_cuenta": "NA"
           }));
     } catch (e) {
       throw Exception('$e');

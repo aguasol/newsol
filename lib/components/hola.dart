@@ -708,7 +708,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       width: anchoActual * 0.13,
                                       decoration: BoxDecoration(
                                         color:
-                                            Color.fromARGB(255, 142, 92, 130),
+                                            Color.fromARGB(255, 230, 213, 57),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: IconButton(
@@ -827,9 +827,9 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                           );
                                         },
                                         icon: Icon(
-                                            Icons.add_location_alt_rounded,
+                                            Icons.add_location_alt_outlined,
                                             size: largoActual * 0.031,
-                                            color: Colors.white),
+                                            color: Colors.black),
                                       ),
                                     ),
                                     SizedBox(
@@ -1104,6 +1104,36 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       ),
                                     );
                                   }),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BarraNavegacion(
+                                              indice: 0,
+                                              subIndice: 2,
+                                            )
+                                        //const Productos()
+                                        ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      right: anchoActual * 0.028),
+                                  height: anchoActual * 0.83,
+                                  width: anchoActual * 0.83,
+                                  decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 130, 219, 133),
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "$apiUrl/images/bodegon.jpg"),
+                                          fit: BoxFit.cover)),
+                                ),
+                              )
+                              /*
                               ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   controller: scrollController2,
@@ -1141,7 +1171,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                             )),
                                       ),
                                     );
-                                  }),
+                                  }),*/
                             ],
                           ),
                         ),
@@ -1166,509 +1196,494 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         SizedBox(
                           height: largoActual * 0.16,
                           child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              surfaceTintColor: Colors.white,
-                              color: Colors.white,
-                              elevation: 10,
-                              child: OutlinedButton(
-                                style: const ButtonStyle(
-                                    shape: MaterialStatePropertyAll(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                    ),
-                                    side: MaterialStatePropertyAll(
-                                        BorderSide.none)),
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierColor:
-                                          Colors.black.withOpacity(0.8),
-                                      builder: (BuildContext context) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          insetPadding: EdgeInsets.all(
-                                            0,
-                                          ),
-                                          backgroundColor: Colors.transparent,
-                                          surfaceTintColor: Colors.transparent,
-                                          child: Stack(
-                                              clipBehavior: Clip.none,
-                                              alignment: Alignment.center,
-                                              children: [
-                                                //CONTAINER CON INFO DE LA PROMOOO
-                                                Container(
-                                                  height: largoActual * 0.64,
-                                                  width: anchoActual * 0.8,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      gradient:
-                                                          const LinearGradient(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  surfaceTintColor: Colors.white,
+                                  color: Colors.yellow,
+                                  elevation: 10,
+                                  child: OutlinedButton(
+                                    style: const ButtonStyle(
+                                        shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                        ),
+                                        side: MaterialStatePropertyAll(
+                                            BorderSide.none)),
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          barrierColor:
+                                              Colors.black.withOpacity(0.8),
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              insetPadding: EdgeInsets.all(
+                                                0,
+                                              ),
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              surfaceTintColor:
+                                                  Colors.transparent,
+                                              child: Stack(
+                                                  clipBehavior: Clip.none,
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    //CONTAINER CON INFO DE LA PROMOOO
+                                                    Container(
+                                                      height:
+                                                          largoActual * 0.64,
+                                                      width: anchoActual * 0.8,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
+                                                          gradient: const LinearGradient(
                                                               colors: [
-                                                            Color.fromRGBO(
-                                                                0,
-                                                                106,
-                                                                252,
-                                                                1.000),
-                                                            Color.fromRGBO(
-                                                                0,
-                                                                106,
-                                                                252,
-                                                                1.000),
-                                                            Color.fromRGBO(
-                                                                0,
-                                                                106,
-                                                                252,
-                                                                1.000),
-                                                            Color.fromRGBO(150,
-                                                                198, 230, 1),
-                                                            Colors.white,
-                                                            Colors.white,
-                                                          ],
+                                                                Color.fromRGBO(
+                                                                    0,
+                                                                    106,
+                                                                    252,
+                                                                    1.000),
+                                                                Color.fromRGBO(
+                                                                    0,
+                                                                    106,
+                                                                    252,
+                                                                    1.000),
+                                                                Color.fromRGBO(
+                                                                    0,
+                                                                    106,
+                                                                    252,
+                                                                    1.000),
+                                                                Color.fromRGBO(
+                                                                    150,
+                                                                    198,
+                                                                    230,
+                                                                    1),
+                                                                Colors.white,
+                                                                Colors.white,
+                                                              ],
                                                               begin: Alignment
                                                                   .topLeft,
                                                               end: Alignment
                                                                   .bottomCenter)),
-                                                  child: Container(
-                                                    margin: EdgeInsets.all(
-                                                        anchoActual * 0.06),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        //ESPACIO PARA QUE EL TEXTO NO SE TAPE CON LAS IMAGENES
-                                                        SizedBox(
-                                                          height: largoActual *
-                                                              0.15,
-                                                        ),
-                                                        //TEXTO QUIERES GANAR MONI
-                                                        Text(
-                                                          '¿Quieres ganar dinero sin salir de tu hogar?',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  largoActual *
-                                                                      0.03,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        //TEXTO CON AGUA SOL PUEDES LOGRARLO
-                                                        Text(
-                                                          '¡Con Agua Sol puedes lograrlo!',
-                                                          style: TextStyle(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .italic,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  largoActual *
-                                                                      0.025,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                        //ESPACIOOO
-                                                        SizedBox(
-                                                            height:
-                                                                largoActual *
-                                                                    0.04),
-                                                        //TEXTO EXPLICATIVO
-                                                        RichText(
-                                                            text: TextSpan(
-                                                                style: TextStyle(
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal,
-                                                                    color:
-                                                                        colorLetra,
-                                                                    fontSize:
-                                                                        largoActual *
-                                                                            0.021,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                                children: [
-                                                              const TextSpan(
-                                                                  text:
-                                                                      'Puedes '),
-                                                              TextSpan(
-                                                                  text:
-                                                                      'GANAR S/. ${ganacia}0 ',
-                                                                  style: const TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800)),
-                                                              const TextSpan(
-                                                                  text:
-                                                                      'por cada '),
-                                                              const TextSpan(
-                                                                  text:
-                                                                      'Bidon Nuevo ',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800)),
-                                                              const TextSpan(
-                                                                  text: 'que '),
-                                                              const TextSpan(
-                                                                  text:
-                                                                      'compren ',
-                                                                  style: TextStyle(
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .italic,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800)),
-                                                              const TextSpan(
-                                                                  text:
-                                                                      'tus contactos con tu código: '),
-                                                              TextSpan(
-                                                                  text:
-                                                                      '${userProvider.user?.codigocliente}.',
-                                                                  style: const TextStyle(
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .italic,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800)),
-                                                            ])),
-                                                        SizedBox(
-                                                          height: largoActual *
-                                                              0.007,
-                                                        ),
-                                                        RichText(
-                                                            text: TextSpan(
-                                                                style: TextStyle(
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .normal,
-                                                                    color:
-                                                                        colorLetra,
-                                                                    fontSize:
-                                                                        largoActual *
-                                                                            0.017,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                                children: const [
-                                                              TextSpan(
-                                                                text:
-                                                                    'Recuerda que tu código tiene una válidez de ',
-                                                              ),
-                                                              TextSpan(
-                                                                  text:
-                                                                      '3 meses ',
-                                                                  style: TextStyle(
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .italic,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800)),
-                                                              TextSpan(
-                                                                  text:
-                                                                      'desde que creaste tu cuenta.'),
-                                                            ])),
-
-//ESPACIOOO
-                                                        SizedBox(
-                                                            height:
-                                                                largoActual *
-                                                                    0.04),
-                                                        Column(
+                                                      child: Container(
+                                                        margin: EdgeInsets.all(
+                                                            anchoActual * 0.06),
+                                                        child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .center,
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
+                                                            //ESPACIO PARA QUE EL TEXTO NO SE TAPE CON LAS IMAGENES
                                                             SizedBox(
                                                               height:
                                                                   largoActual *
-                                                                      (17 /
-                                                                          740),
-                                                              child: ElevatedButton(
-                                                                  style: const ButtonStyle(
-                                                                      elevation: MaterialStatePropertyAll(10),
-                                                                      surfaceTintColor: MaterialStatePropertyAll(Colors.white),
-                                                                      backgroundColor: MaterialStatePropertyAll(Colors.white),
-                                                                      shape: MaterialStatePropertyAll(
-                                                                        RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.all(Radius.circular(10))),
-                                                                      ),
-                                                                      side: MaterialStatePropertyAll(BorderSide.none)),
-                                                                  onPressed: () async {
-                                                                    await Share.share(
-                                                                        mensajeCodigoParaAmigos +
-                                                                            urlPreview);
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
+                                                                      0.15,
+                                                            ),
+                                                            //TEXTO QUIERES GANAR MONI
+                                                            Text(
+                                                              '¿Quieres ganar dinero sin salir de tu hogar?',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      largoActual *
+                                                                          0.03,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            //TEXTO CON AGUA SOL PUEDES LOGRARLO
+                                                            Text(
+                                                              '¡Con Agua Sol puedes lograrlo!',
+                                                              style: TextStyle(
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      largoActual *
+                                                                          0.025,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                            //ESPACIOOO
+                                                            SizedBox(
+                                                                height:
+                                                                    largoActual *
+                                                                        0.04),
+                                                            //TEXTO EXPLICATIVO
+                                                            RichText(
+                                                                text: TextSpan(
+                                                                    style: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        color:
+                                                                            colorLetra,
+                                                                        fontSize:
+                                                                            largoActual *
+                                                                                0.021,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
                                                                     children: [
-                                                                      Icon(
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'Puedes '),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          'GANAR S/. ${ganacia}0 ',
+                                                                      style: const TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.w800)),
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'por cada '),
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'Bidon Nuevo ',
+                                                                      style: TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.w800)),
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'que '),
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'compren ',
+                                                                      style: TextStyle(
+                                                                          fontStyle: FontStyle
+                                                                              .italic,
+                                                                          fontWeight:
+                                                                              FontWeight.w800)),
+                                                                  const TextSpan(
+                                                                      text:
+                                                                          'tus contactos con tu código: '),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          '${userProvider.user?.codigocliente}.',
+                                                                      style: const TextStyle(
+                                                                          fontStyle: FontStyle
+                                                                              .italic,
+                                                                          fontWeight:
+                                                                              FontWeight.w800)),
+                                                                ])),
+                                                            SizedBox(
+                                                              height:
+                                                                  largoActual *
+                                                                      0.007,
+                                                            ),
+                                                            RichText(
+                                                                text: TextSpan(
+                                                                    style: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .normal,
+                                                                        color:
+                                                                            colorLetra,
+                                                                        fontSize:
+                                                                            largoActual *
+                                                                                0.017,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                    children: const [
+                                                                  TextSpan(
+                                                                    text:
+                                                                        'Recuerda que tu código tiene una válidez de ',
+                                                                  ),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          '3 meses ',
+                                                                      style: TextStyle(
+                                                                          fontStyle: FontStyle
+                                                                              .italic,
+                                                                          fontWeight:
+                                                                              FontWeight.w800)),
+                                                                  TextSpan(
+                                                                      text:
+                                                                          'desde que creaste tu cuenta.'),
+                                                                ])),
+
+//ESPACIOOO
+                                                            SizedBox(
+                                                                height:
+                                                                    largoActual *
+                                                                        0.04),
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                SizedBox(
+                                                                  height:
+                                                                      largoActual *
+                                                                          (17 /
+                                                                              740),
+                                                                  child: ElevatedButton(
+                                                                      style: const ButtonStyle(
+                                                                          elevation: MaterialStatePropertyAll(10),
+                                                                          surfaceTintColor: MaterialStatePropertyAll(Colors.white),
+                                                                          backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                                                          shape: MaterialStatePropertyAll(
+                                                                            RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                          ),
+                                                                          side: MaterialStatePropertyAll(BorderSide.none)),
+                                                                      onPressed: () async {
+                                                                        await Share.share(mensajeCodigoParaAmigos +
+                                                                            urlPreview);
+                                                                      },
+                                                                      child: Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Icon(
+                                                                              Icons.share,
+                                                                              size: largoActual * 0.02,
+                                                                              color: colorTextos),
+                                                                          SizedBox(
+                                                                              width: anchoActual * 0.02),
+                                                                          Text(
+                                                                            'COMPARTE TU CÓDIGO',
+                                                                            style: TextStyle(
+                                                                                fontStyle: FontStyle.normal,
+                                                                                color: colorTextos,
+                                                                                fontSize: largoActual * 0.015,
+                                                                                fontWeight: FontWeight.w500),
+                                                                          ),
+                                                                        ],
+                                                                      )),
+                                                                ),
+                                                                SizedBox(
+                                                                    height:
+                                                                        largoActual *
+                                                                            0.01),
+                                                                //BOTON PARA PUBLICARLO EN TU ESTADO
+                                                                SizedBox(
+                                                                  height:
+                                                                      largoActual *
+                                                                          (17 /
+                                                                              760),
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    style: const ButtonStyle(
+                                                                        elevation: MaterialStatePropertyAll(10),
+                                                                        surfaceTintColor: MaterialStatePropertyAll(Colors.white),
+                                                                        backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                                                        shape: MaterialStatePropertyAll(
+                                                                          RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                        ),
+                                                                        side: MaterialStatePropertyAll(BorderSide.none)),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      final image =
+                                                                          await rootBundle
+                                                                              .load(direccionImagenParaEstados);
+                                                                      final buffer =
+                                                                          image
+                                                                              .buffer;
+                                                                      final temp =
+                                                                          await getTemporaryDirectory();
+                                                                      final path =
+                                                                          '${temp.path}/image.jpg';
+
+                                                                      await Share
+                                                                          .shareXFiles(
+                                                                        [
+                                                                          XFile
+                                                                              .fromData(
+                                                                            buffer.asUint8List(
+                                                                              image.offsetInBytes,
+                                                                              image.lengthInBytes,
+                                                                            ),
+                                                                            mimeType:
+                                                                                'jpg',
+                                                                            name:
+                                                                                'usaMiCodigo',
+                                                                          )
+                                                                        ],
+                                                                        subject:
+                                                                            'mi codigo',
+                                                                      );
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Icon(
                                                                           Icons
                                                                               .share,
                                                                           size: largoActual *
                                                                               0.02,
                                                                           color:
-                                                                              colorTextos),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              anchoActual * 0.02),
-                                                                      Text(
-                                                                        'COMPARTE TU CÓDIGO',
-                                                                        style: TextStyle(
-                                                                            fontStyle: FontStyle
-                                                                                .normal,
-                                                                            color:
-                                                                                colorTextos,
-                                                                            fontSize: largoActual *
-                                                                                0.015,
-                                                                            fontWeight:
-                                                                                FontWeight.w500),
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ),
-                                                            SizedBox(
-                                                                height:
-                                                                    largoActual *
-                                                                        0.01),
-                                                            //BOTON PARA PUBLICARLO EN TU ESTADO
-                                                            SizedBox(
-                                                              height:
-                                                                  largoActual *
-                                                                      (17 /
-                                                                          760),
-                                                              child:
-                                                                  ElevatedButton(
-                                                                style:
-                                                                    const ButtonStyle(
-                                                                        elevation: MaterialStatePropertyAll(
-                                                                            10),
-                                                                        surfaceTintColor:
-                                                                            MaterialStatePropertyAll(Colors
-                                                                                .white),
-                                                                        backgroundColor:
-                                                                            MaterialStatePropertyAll(Colors
-                                                                                .white),
-                                                                        shape:
-                                                                            MaterialStatePropertyAll(
-                                                                          RoundedRectangleBorder(
-                                                                              borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                        ),
-                                                                        side: MaterialStatePropertyAll(
-                                                                            BorderSide.none)),
-                                                                onPressed:
-                                                                    () async {
-                                                                  final image =
-                                                                      await rootBundle
-                                                                          .load(
-                                                                              direccionImagenParaEstados);
-                                                                  final buffer =
-                                                                      image
-                                                                          .buffer;
-                                                                  final temp =
-                                                                      await getTemporaryDirectory();
-                                                                  final path =
-                                                                      '${temp.path}/image.jpg';
-
-                                                                  await Share
-                                                                      .shareXFiles(
-                                                                    [
-                                                                      XFile
-                                                                          .fromData(
-                                                                        buffer
-                                                                            .asUint8List(
-                                                                          image
-                                                                              .offsetInBytes,
-                                                                          image
-                                                                              .lengthInBytes,
-                                                                        ),
-                                                                        mimeType:
-                                                                            'jpg',
-                                                                        name:
-                                                                            'usaMiCodigo',
-                                                                      )
-                                                                    ],
-                                                                    subject:
-                                                                        'mi codigo',
-                                                                  );
-                                                                },
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .share,
-                                                                      size: largoActual *
-                                                                          0.02,
-                                                                      color:
-                                                                          colorTextos,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: anchoActual *
-                                                                          0.02,
-                                                                    ),
-                                                                    Text(
-                                                                      'PUBLÍCALO EN TU ESTADO',
-                                                                      style: TextStyle(
-                                                                          fontStyle: FontStyle
-                                                                              .normal,
-                                                                          color:
                                                                               colorTextos,
-                                                                          fontSize: largoActual *
-                                                                              0.015,
-                                                                          fontWeight:
-                                                                              FontWeight.w500),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              anchoActual * 0.02,
+                                                                        ),
+                                                                        Text(
+                                                                          'PUBLÍCALO EN TU ESTADO',
+                                                                          style: TextStyle(
+                                                                              fontStyle: FontStyle.normal,
+                                                                              color: colorTextos,
+                                                                              fontSize: largoActual * 0.015,
+                                                                              fontWeight: FontWeight.w500),
+                                                                        ),
+                                                                      ],
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
-                                                              ),
+                                                              ],
                                                             ),
+//BOTON COMPARTE
                                                           ],
                                                         ),
-//BOTON COMPARTE
-                                                      ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
-                                                //ANIMACION PALMERAS
-                                                Positioned(
-                                                  top: -largoActual * 0.08,
-                                                  left: anchoActual * 0.035,
-                                                  height: largoActual * 0.23,
-                                                  child: Lottie.asset(
-                                                      'lib/imagenes/palmeras1.json'),
-                                                ),
-
-                                                //ANIMACION PLAYERA
-                                                Positioned(
-                                                  top: -largoActual * 0.08,
-                                                  left: anchoActual * 0.035,
-                                                  height: largoActual * 0.23,
-                                                  child: Lottie.asset(
-                                                      'lib/imagenes/playa1.json'),
-                                                ),
-                                                //ANIMACION PALMERAS
-                                                Positioned(
-                                                  top: -largoActual * 0.08,
-                                                  left: anchoActual * 0.18,
-                                                  height: largoActual * 0.23,
-                                                  child: Lottie.asset(
-                                                      'lib/imagenes/palmeras1.json'),
-                                                ),
-
-                                                //IMAGEN DE BIDONCITO BONITO
-                                                Positioned(
-                                                  top: -largoActual * 0.15,
-                                                  right: -anchoActual * 0.08,
-                                                  child: Container(
-                                                    height: largoActual * 0.30,
-                                                    width: anchoActual * 0.5,
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            top: 10),
-                                                    decoration: const BoxDecoration(
-                                                        color:
-                                                            Colors.transparent,
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                                'lib/imagenes/BIDON20.png'),
-                                                            fit: BoxFit
-                                                                .scaleDown)),
-                                                  ),
-                                                ),
-                                                //BOTON DE CERRADO
-                                                Positioned(
-                                                  top: -largoActual * 0.13,
-                                                  right: -anchoActual * 0.018,
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      decoration: BoxDecoration(
-                                                          color: const Color
-                                                              .fromARGB(11, 191,
-                                                              191, 191),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      50)),
+                                                    //ANIMACION PALMERAS
+                                                    Positioned(
+                                                      top: -largoActual * 0.08,
+                                                      left: anchoActual * 0.035,
                                                       height:
-                                                          largoActual * 0.05,
-                                                      width: largoActual * 0.05,
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const Pedido()
-                                                                //const Promos()
-                                                                ),
-                                                          );
-                                                        },
-                                                        icon: const Icon(Icons
-                                                            .close_rounded),
-                                                        color: Colors.white,
-                                                        iconSize:
-                                                            largoActual * 0.030,
-                                                      )),
-                                                ),
-                                              ]),
-                                        );
-                                      });
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
+                                                          largoActual * 0.23,
+                                                      child: Lottie.asset(
+                                                          'lib/imagenes/palmeras1.json'),
+                                                    ),
+
+                                                    //ANIMACION PLAYERA
+                                                    Positioned(
+                                                      top: -largoActual * 0.08,
+                                                      left: anchoActual * 0.035,
+                                                      height:
+                                                          largoActual * 0.23,
+                                                      child: Lottie.asset(
+                                                          'lib/imagenes/playa1.json'),
+                                                    ),
+                                                    //ANIMACION PALMERAS
+                                                    Positioned(
+                                                      top: -largoActual * 0.08,
+                                                      left: anchoActual * 0.18,
+                                                      height:
+                                                          largoActual * 0.23,
+                                                      child: Lottie.asset(
+                                                          'lib/imagenes/palmeras1.json'),
+                                                    ),
+
+                                                    //IMAGEN DE BIDONCITO BONITO
+                                                    Positioned(
+                                                      top: -largoActual * 0.15,
+                                                      right:
+                                                          -anchoActual * 0.08,
+                                                      child: Container(
+                                                        height:
+                                                            largoActual * 0.30,
+                                                        width:
+                                                            anchoActual * 0.5,
+                                                        margin: const EdgeInsets
+                                                            .only(top: 10),
+                                                        decoration: const BoxDecoration(
+                                                            color: Colors
+                                                                .transparent,
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    'lib/imagenes/BIDON20.png'),
+                                                                fit: BoxFit
+                                                                    .scaleDown)),
+                                                      ),
+                                                    ),
+                                                    //BOTON DE CERRADO
+                                                    Positioned(
+                                                      top: -largoActual * 0.13,
+                                                      right:
+                                                          -anchoActual * 0.018,
+                                                      child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                              color: const Color
+                                                                  .fromARGB(
+                                                                  11,
+                                                                  191,
+                                                                  191,
+                                                                  191),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          50)),
+                                                          height: largoActual *
+                                                              0.05,
+                                                          width: largoActual *
+                                                              0.05,
+                                                          child: IconButton(
+                                                            onPressed: () {
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            const Pedido()
+                                                                    //const Promos()
+                                                                    ),
+                                                              );
+                                                            },
+                                                            icon: const Icon(Icons
+                                                                .close_rounded),
+                                                            color: Colors.white,
+                                                            iconSize:
+                                                                largoActual *
+                                                                    0.030,
+                                                          )),
+                                                    ),
+                                                  ]),
+                                            );
+                                          });
+                                    },
+                                    child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          'S/. ${userProvider.user?.saldoBeneficio}0',
-                                          style: TextStyle(
-                                              color: colorLetra,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 35),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'S/. ${userProvider.user?.saldoBeneficio}0',
+                                              style: TextStyle(
+                                                  color: colorLetra,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 35),
+                                            ),
+                                            Text(
+                                              'Retiralo hasta el: ${fechaLimite.day}/${fechaLimite.month}/${fechaLimite.year}',
+                                              style: TextStyle(
+                                                  color: colorLetra,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize:
+                                                      largoActual * 0.016),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'Retiralo hasta el: ${fechaLimite.day}/${fechaLimite.month}/${fechaLimite.year}',
-                                          style: TextStyle(
-                                              color: colorLetra,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: largoActual * 0.016),
-                                        ),
+                                        Lottie.asset(
+                                            'lib/imagenes/billetera3.json'),
                                       ],
                                     ),
-                                    Lottie.asset(
-                                        'lib/imagenes/billetera3.json'),
-                                  ],
-                                ),
-                              )),
+                                  ))
+                              .animate()
+                              .shake(duration: Duration(milliseconds: 700)),
                         ),
                       ]))),
         ));
