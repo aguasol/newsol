@@ -130,19 +130,62 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
           context: context,
           builder: (context) {
             return Dialog(
-              child: Container(
-                height: 500,
-                width: 400,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 4, color: Colors.white),
-                    color: const Color.fromARGB(255, 130, 219, 133),
-                    borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                      image: AssetImage('lib/imagenes/bodegoncito.png'),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-            );
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      color: Colors.green,
+                      width: 300,
+                      height: 300,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            color: Colors.grey,
+                            width: 370,
+                            height: 70,
+                          ),
+                          Container(
+                            color: Colors.blue,
+                            width: 370,
+                            height: 70,
+                          ),
+                          Container(
+                            color: Colors.teal,
+                            width: 370,
+                            height: 70,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top:-MediaQuery.of(context).size.width/9,
+                      left: -MediaQuery.of(context).size.width/9,
+                      child: Container(
+                       // color: Colors.yellow,
+                        width: MediaQuery.of(context).size.width/5,
+                        height: MediaQuery.of(context).size.height/5,
+                        child: Image.asset('lib/imagenes/BIDON20.png'),
+                      ).animate().fade().shake(),
+                    ),
+                    Positioned(
+                      top:MediaQuery.of(context).size.width/9,
+                      right: -MediaQuery.of(context).size.width/9,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:Colors.yellow,
+                          borderRadius:BorderRadius.circular(75)
+                        ),
+                        width: MediaQuery.of(context).size.width/5,
+                        height: MediaQuery.of(context).size.height/9,
+                        child: Lottie.asset("lib/imagenes/manita_left.json")),
+                    )
+                  ],
+                ));
           });
     });
   }
@@ -169,7 +212,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     if (widget.esNuevo != null &&
         widget.esNuevo == true &&
         yaSeMostro == false) {
-      //await muestraDialogoPubli(context);
+      await muestraDialogoPubli(context);
     } else {
       print("+++++++++++++++++++++++++++++++++++++++++");
       print(widget.esNuevo);
@@ -1001,29 +1044,60 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         ),
 
                         //BIENVENIDA DEL CLIENTE
-                        Container(
-                          width: anchoActual,
-                          margin: EdgeInsets.only(
-                              left: anchoActual * 0.055,
-                              top: largoActual * 0.016),
-                          child: Text(
-                            "Bienvenid@, ${userProvider.user?.nombre?.capitalize()}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                fontSize: largoActual * 0.019,
-                                color: colorLetra),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // color: Colors.amber,
+                                  //width: anchoActual,
+                                  margin: EdgeInsets.only(
+                                      left: anchoActual * 0.055,
+                                      top: largoActual * 0.016,
+                                      right: 20),
+                                  child: Text(
+                                    "Bienvenid@, ${userProvider.user?.nombre?.capitalize()}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: largoActual * 0.019,
+                                        color: colorLetra),
+                                  ),
+                                ),
+                                Container(
+                                  //color: Colors.purple,
+                                  margin: EdgeInsets.only(
+                                      left: anchoActual * 0.055),
+                                  child: Text(
+                                    "Disfruta de Agua Sol!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: largoActual * 0.019,
+                                        color: colorTextos),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(right: 5),
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  //color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: IconButton(
+                                iconSize: 5,
+                                icon: Image(
+                                    image: AssetImage("lib/imagenes/info.png")),
+                                onPressed: () async {
+                                  await muestraDialogoPubli(context);
+                                },
+                              ),
+                            ).animate().shake().fade()
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: anchoActual * 0.055),
-                          child: Text(
-                            "Disfruta de Agua Sol!",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: largoActual * 0.019,
-                                color: colorTextos),
-                          ),
-                        ),
+
                         SizedBox(
                           height: largoActual * 0.016,
                         ),
