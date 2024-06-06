@@ -232,11 +232,13 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                               text: TextSpan(
                                                   text:
-                                                      '\n Acumula dinero\nen tu billetera SOL',
+                                                      '\n\nAcumula\ndinero en tu\nbilletera SOL',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -251,7 +253,11 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                           .fade(),
                                       Container(
                                         decoration: BoxDecoration(
-                                          image: DecorationImage(image: AssetImage("lib/imagenes/amigso.png"),
+                                        
+                                        
+                                          image: DecorationImage(
+                                            image: AssetImage("lib/imagenes/amigso.png"),
+                                            fit: BoxFit.cover
                                           )
                                         ),
                                         width:
@@ -259,33 +265,37 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                 3,
                                         height:
                                             MediaQuery.of(context).size.height /
-                                                5,
+                                                5.5,
                                        
                                       )
                                     ],
                                   ),
                                   Text(
-                                    "Comparte tu código\n ${codigo}\n con tus amigos! =)",
+                                    "Comparte tu código\n${codigo}\ncon tus amigos! =)",
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: MediaQuery.of(context).size.width*0.06,
                                         fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
                                             255, 7, 91, 161)),
                                   ).animate().shake(),
                                   Text("* Recuerda que también puedes compartirlo desde la billetera sol *",style: TextStyle(
-                                    color: const Color.fromARGB(255, 3, 76, 135)
+                                    color: const Color.fromARGB(255, 3, 76, 135),fontSize: MediaQuery.of(context).size.width*0.023
                                   ),),
                                   Center(
                                     child: Container(
-                                      //color: Colors.grey,
+                                      
                                         width:
                                             MediaQuery.of(context).size.width / 2,
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 7.5,
-                                        child: Center(
-                                            child: Image.asset(
-                                                "lib/imagenes/wallet.png"))),
+                                                decoration: BoxDecoration(
+                                                  
+                                                  image: DecorationImage(
+                                                    image: AssetImage("lib/imagenes/wallet.png"),
+                                                    fit: BoxFit.contain)
+                                                ),
+                                        ),
                                   )
                                 ],
                               )),
