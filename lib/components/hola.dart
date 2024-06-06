@@ -94,7 +94,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   String tituloUbicacion = 'Gracias por compartir tu ubicación!';
   String contenidoUbicacion = '¡Disfruta de Sol Market!';
   List<String> listPromociones = [];
-  
 
   //bool _disposed = false;
   //bool _autoScrollInProgress = false;
@@ -127,23 +126,23 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   Future<void> muestraDialogoPubli(BuildContext context) async {
     SharedPreferences yasemostroPubli = await SharedPreferences.getInstance();
     yasemostroPubli.setBool("ya", true);
-  final userProvider = Provider.of<UserProvider>(context, listen: false);
-  var codigo = userProvider.user?.codigocliente;
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    var codigo = userProvider.user?.codigocliente;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showDialog(
           context: context,
           builder: (context) {
             return Dialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(2),
                       // color: Colors.green,
-                      width: MediaQuery.of(context).size.width / 1.4,
+                      width: MediaQuery.of(context).size.width / 1.3,
                       height: MediaQuery.of(context).size.height / 2,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
@@ -153,11 +152,12 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               margin: EdgeInsets.only(right: 0),
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(colors: [
-                            
                                 Colors.blue,
                                 Colors.blue.shade300,
+                                Colors.blue.shade200,
                                 Colors.yellow.shade100,
-                                Colors.white
+                                Colors.white,
+                                Colors.blue.shade100
                               ])),
                               width: 370,
                               height: 70,
@@ -167,17 +167,20 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                   Row(
                                     children: [
                                       RichText(
-                                          text: TextSpan(
-                                              text:
-                                                  '\n Sabías\n que\n puedes \n ganar\n dinero con ...',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          20,
-                                                  color: Color.fromARGB(255, 226, 227, 226)))),
+                                              text: TextSpan(
+                                                  text:
+                                                      '\n Sabías\n que\n puedes \n ganar\n dinero con ...',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                      color: Colors.white)))
+                                          .animate()
+                                          .fade(),
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -190,40 +193,126 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       )
                                     ],
                                   ),
-                                  Text("Descubre \ncomo hacerlo !",
-                                  style: TextStyle(fontSize: 40,fontWeight: FontWeight.w300,color: const Color.fromARGB(255, 7, 91, 161)),),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width/2,
-                                    height: MediaQuery.of(context).size.height/7,
-                                    child: Center(child: Image.asset("lib/imagenes/mujer.png")))
-                                  
+                                  Text(
+                                    "Descubre \ncomo hacerlo !",
+                                    style: TextStyle(
+                                        fontSize: MediaQuery.of(context).size.width*0.085,
+                                        fontWeight: FontWeight.w300,
+                                        color: const Color.fromARGB(
+                                            255, 7, 91, 161)),
+                                  ).animate().shake(),
+                                  Center(
+                                    child: Container(
+                                      
+                                        width:
+                                            MediaQuery.of(context).size.width / 2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                7,
+                                        child: Center(
+                                            child: Image.asset(
+                                                "lib/imagenes/mujer.png"))),
+                                  )
                                 ],
                               )),
                           Container(
-                            margin: EdgeInsets.only(right: 0),
-                            padding: EdgeInsets.all(3),
-                            decoration: BoxDecoration(
+                              padding: EdgeInsets.all(6),
+                              margin: EdgeInsets.only(right: 0),
+                              decoration: BoxDecoration(
                                   gradient: LinearGradient(colors: [
-                            
                                 Colors.blue,
                                 Colors.blue.shade300,
+                                Colors.blue.shade200,
                                 Colors.yellow.shade100,
                                 Colors.white
                               ])),
+                              width: 370,
+                              height: 70,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      RichText(
+                                              text: TextSpan(
+                                                  text:
+                                                      '\n Acumula dinero\nen tu billetera SOL',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                      color: Color.fromARGB(
+                                                          255, 226, 227, 226))))
+                                          .animate()
+                                          .fade(),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: AssetImage("lib/imagenes/amigso.png"),
+                                          )
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5,
+                                       
+                                      )
+                                    ],
+                                  ),
+                                  Text(
+                                    "Comparte tu código\n ${codigo}\n con tus amigos! =)",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 7, 91, 161)),
+                                  ).animate().shake(),
+                                  Text("* Recuerda que también puedes compartirlo desde la billetera sol *",style: TextStyle(
+                                    color: const Color.fromARGB(255, 3, 76, 135)
+                                  ),),
+                                  Center(
+                                    child: Container(
+                                      //color: Colors.grey,
+                                        width:
+                                            MediaQuery.of(context).size.width / 2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                7.5,
+                                        child: Center(
+                                            child: Image.asset(
+                                                "lib/imagenes/wallet.png"))),
+                                  )
+                                ],
+                              )),
+                          Container(
+                            margin: EdgeInsets.only(right: 20),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                              Colors.blue,
+                              Colors.blue.shade300,
+                              Colors.yellow.shade100,
+                              Colors.white
+                            ])),
                             width: 370,
                             height: 70,
                             child: Column(
-
                               children: [
-                                Text("\n\nAcumula dinero\nen tu billetera SOL,\n compartiendo tu código \n",style: GoogleFonts.josefinSans(
-                                  fontSize:20,
-                                  color:Colors.white
-                                ),),
+                                Text(
+                                  "\n\nPuedes usar el código de un amigo para gozar de un descuento, en la compra de un bidón de 20L\n",
+                                  style: GoogleFonts.josefinSans(
+                                      fontSize: 20, color: Colors.white),
+                                ),
                                 RichText(
                                   text: TextSpan(
-                                    text: codigo,
-                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)
-                                  ),
+                                      text: codigo,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ],
                             ),
@@ -231,55 +320,27 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           Container(
                             margin: EdgeInsets.only(right: 20),
                             decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                            
-                                 Colors.blue,
-                                Colors.blue.shade300,
-                                Colors.yellow.shade100,
-                                Colors.white
-                              ])),
+                                gradient: LinearGradient(colors: [
+                              Colors.blue,
+                              Colors.blue.shade300,
+                              Colors.yellow.shade100,
+                              Colors.white
+                            ])),
                             width: 370,
                             height: 70,
                             child: Column(
-
                               children: [
-                                Text("\n\nPuedes usar el código de un amigo para gozar de un descuento, en la compra de un bidón de 20L\n",style: GoogleFonts.josefinSans(
-                                  fontSize:20,
-                                  color:Colors.white
-                                ),),
-                                RichText(
-                                  text: TextSpan(
-                                    text: codigo,
-                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)
-                                  ),
+                                Text(
+                                  "\n\nTambién puedes gozar de un descuenteo en la compra de tu primer bidón de 20L\n",
+                                  style: GoogleFonts.josefinSans(
+                                      fontSize: 20, color: Colors.white),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 20),
-                            decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                            
-                                 Colors.blue,
-                                Colors.blue.shade300,
-                                Colors.yellow.shade100,
-                                Colors.white
-                              ])),
-                            width: 370,
-                            height: 70,
-                            child: Column(
-
-                              children: [
-                                Text("\n\nTambién puedes gozar de un descuenteo en la compra de tu primer bidón de 20L\n",style: GoogleFonts.josefinSans(
-                                  fontSize:20,
-                                  color:Colors.white
-                                ),),
                                 RichText(
                                   text: TextSpan(
-                                    text: codigo,
-                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)
-                                  ),
+                                      text: codigo,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ],
                             ),
