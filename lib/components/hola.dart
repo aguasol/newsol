@@ -86,12 +86,12 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   List<String> tempString = [];
   Map<int, dynamic> mapaLineasZonas = {};
   //ACA SE DEBE ACTUALIZAR LA IMAGEN PARA COMPARTIR EN LOS ESTADOS
-  String direccionImagenParaEstados = 'lib/imagenes/logo_aguasol_splash.png';
+  String direccionImagenParaEstados = 'lib/imagenes/12-so-dscto-AGUA-SOL.png';
   //ACA SE DEBE ACTUALIZAR EL LINK PARA DESCARGAR LA APPPPPP
   String urlPreview = 'https://www.youtube.com/shorts/ombROZ2VXb4';
   String urlExplicacion = 'https://www.youtube.com/shorts/ombROZ2VXb4';
   String tituloUbicacion = 'Gracias por compartir tu ubicación!';
-  String contenidoUbicacion = '¡Disfruta de Agua Sol!';
+  String contenidoUbicacion = '¡Disfruta de Sol Market!';
   List<String> listPromociones = [];
 
   //bool _disposed = false;
@@ -149,7 +149,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               margin: EdgeInsets.only(right: 0),
                               decoration: BoxDecoration(
                                   gradient: LinearGradient(colors: [
-                            
                                 Colors.yellow,
                                 Colors.yellow.shade300,
                                 Colors.yellow.shade100,
@@ -173,7 +172,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                               .size
                                                               .width /
                                                           20,
-                                                  color: Color.fromARGB(255, 91, 175, 93)))),
+                                                  color: Color.fromARGB(
+                                                      255, 91, 175, 93)))),
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -186,9 +186,12 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       )
                                     ],
                                   ),
-                                  Text("Descubre \ncomo hacerlo !",
-                                  style: TextStyle(fontSize: 50,fontWeight: FontWeight.w300),),
-                                  
+                                  Text(
+                                    "Descubre \ncomo hacerlo !",
+                                    style: TextStyle(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.w300),
+                                  ),
                                 ],
                               )),
                           Container(
@@ -229,13 +232,13 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           child: Lottie.asset("lib/imagenes/manita_left.json")),
                     ),
                     Positioned(
-                      top: MediaQuery.of(context).size.height/3,
-                      left: 50,
-                      child: Container(
-                                    height:300,
-                                    width: 300,
-                                    child: Lottie.asset("lib/imagenes/ganaste.json"),
-                                  ))
+                        top: MediaQuery.of(context).size.height / 3,
+                        left: 50,
+                        child: Container(
+                          height: 300,
+                          width: 300,
+                          child: Lottie.asset("lib/imagenes/ganaste.json"),
+                        ))
                   ],
                 ));
           });
@@ -1122,7 +1125,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                   margin: EdgeInsets.only(
                                       left: anchoActual * 0.055),
                                   child: Text(
-                                    "Disfruta de Agua Sol!",
+                                    "Disfruta de Sol Market!",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: largoActual * 0.019,
@@ -1320,7 +1323,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           height: largoActual * 0.009,
                         ),
                         SizedBox(
-                          height: largoActual * 0.16,
+                          height: largoActual * 0.14,
                           child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
@@ -1427,7 +1430,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                             ),
                                                             //TEXTO CON AGUA SOL PUEDES LOGRARLO
                                                             Text(
-                                                              '¡Con Agua Sol puedes lograrlo!',
+                                                              '¡Con Sol Market puedes lograrlo!',
                                                               style: TextStyle(
                                                                   fontStyle:
                                                                       FontStyle
