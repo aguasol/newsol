@@ -168,28 +168,28 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(2),
+                      padding: EdgeInsets.all(0),
                       // color: Colors.green,
-                      width: MediaQuery.of(context).size.width / 1.3,
+                      width: 450,// MediaQuery.of(context).size.width / 1.3,
                       height: MediaQuery.of(context).size.height / 2,
                       child: ListView(
                         controller: _scrollController,
                         scrollDirection: Axis.horizontal,
                         children: [
                           Container(
-                            width: 350,
+                            width: 400,
                             color: Colors.blue,
                           ),
                           Container(
-                            width: 350,
+                            width: 400,
                             color: Colors.green,
                           ),
                           Container(
-                            width: 350,
+                            width: 400,
                             color: Colors.yellow,
                           ),
                           Container(
-                            width: 350,
+                            width: 400,
                             color: Colors.amber,
                           ),
                         ],
@@ -205,7 +205,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
-                    Positioned(
+                   /* Positioned(
                       top: MediaQuery.of(context).size.width,
                       right: MediaQuery.of(context).size.width / 3.5,
                       child: Container(
@@ -215,17 +215,18 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           width: MediaQuery.of(context).size.width / 7,
                           height: MediaQuery.of(context).size.height / 15,
                           child: Lottie.asset("lib/imagenes/manita_left.json")),
-                    ),
-                    Positioned(
+                    ),*/
+                   /* Positioned(
                         top: MediaQuery.of(context).size.height / 3,
                         left: 50,
                         child: Container(
                           height: 300,
                           width: 300,
                           child: Lottie.asset("lib/imagenes/ganaste.json"),
-                        ))
+                        ))*/
                   ],
-                ));
+                )
+                );
           });
     });
   }
