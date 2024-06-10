@@ -792,7 +792,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       width: anchoActual * 0.13,
                                       decoration: BoxDecoration(
                                         color:
-                                            Color.fromARGB(255, 230, 213, 57),
+                                            Colors.yellow.shade200,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: IconButton(
@@ -1314,7 +1314,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   surfaceTintColor: Colors.white,
-                                  color: Colors.yellow,
+                                  color: Colors.yellow.shade200,
                                   elevation: 10,
                                   child: OutlinedButton(
                                     style: const ButtonStyle(

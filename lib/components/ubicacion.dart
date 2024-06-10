@@ -553,8 +553,7 @@ class _UbicacionState extends State<Ubicacion> {
                                         CircularProgressIndicator(
                                           backgroundColor: Color.fromARGB(255, 19, 65, 78),
                                         ),
-                                        SizedBox(width: 20),
-                                        Text("Cargando..."),
+                                       
                                       ],
                                     ),
                                   );
