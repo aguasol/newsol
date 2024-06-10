@@ -102,6 +102,9 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   ScrollController scrollController2 = ScrollController();
   DateTime fechaLimite = DateTime.now();
 
+  final ScrollController _scrollController = ScrollController();
+  Timer? _timer;
+
   DateTime mesyAnio(String? fecha) {
     if (fecha is String) {
       return DateTime.parse(fecha);
@@ -110,16 +113,40 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     }
   }
 
+  void _startAutoScroll() {
+    _timer = Timer.periodic(Duration(seconds: 2), (timer) {
+      if (_scrollController.hasClients) {
+        double maxScroll = _scrollController.position.maxScrollExtent;
+        double currentScroll = _scrollController.position.pixels;
+        double scrollAmount = 200.0; // Cantidad de desplazamiento
+
+        if (currentScroll >= maxScroll) {
+          _scrollController.jumpTo(0);
+        } else {
+          _scrollController.animateTo(
+            currentScroll + scrollAmount,
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        }
+      }
+    });
+  }
+
   @override
   void dispose() {
     super.dispose();
     scrollController1.dispose();
     scrollController2.dispose();
+    _timer?.cancel();
+    _scrollController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
+    _startAutoScroll();
+
     ordenarFuncionesInit();
   }
 
@@ -128,6 +155,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     yasemostroPubli.setBool("ya", true);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     var codigo = userProvider.user?.codigocliente;
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showDialog(
           context: context,
@@ -145,215 +173,24 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                       width: MediaQuery.of(context).size.width / 1.3,
                       height: MediaQuery.of(context).size.height / 2,
                       child: ListView(
+                        controller: _scrollController,
                         scrollDirection: Axis.horizontal,
                         children: [
                           Container(
-                              padding: EdgeInsets.all(6),
-                              margin: EdgeInsets.only(right: 0),
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                                Colors.blue,
-                                Colors.blue.shade300,
-                                Colors.blue.shade200,
-                                Colors.yellow.shade100,
-                                Colors.white,
-                                Colors.blue.shade100
-                              ])),
-                              width: 370,
-                              height: 70,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      RichText(
-                                              text: TextSpan(
-                                                  text:
-                                                      '\n Sabías\n que\n puedes \n ganar\n dinero con ...',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              20,
-                                                      color: Colors.white)))
-                                          .animate()
-                                          .fade(),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                5,
-                                        child: Image.asset(
-                                            "lib/imagenes/logo_aguasol_splash.png"),
-                                      )
-                                    ],
-                                  ),
-                                  Text(
-                                    "Descubre \ncomo hacerlo !",
-                                    style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width*0.085,
-                                        fontWeight: FontWeight.w300,
-                                        color: const Color.fromARGB(
-                                            255, 7, 91, 161)),
-                                  ).animate().shake(),
-                                  Center(
-                                    child: Container(
-                                      
-                                        width:
-                                            MediaQuery.of(context).size.width / 2,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                7,
-                                        child: Center(
-                                            child: Image.asset(
-                                                "lib/imagenes/mujer.png"))),
-                                  )
-                                ],
-                              )),
-                          Container(
-                              padding: EdgeInsets.all(6),
-                              margin: EdgeInsets.only(right: 0),
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                                Colors.blue,
-                                Colors.blue.shade300,
-                                Colors.blue.shade200,
-                                Colors.yellow.shade100,
-                                Colors.white
-                              ])),
-                              width: 370,
-                              height: 70,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      RichText(
-                                              text: TextSpan(
-                                                  text:
-                                                      '\n\nAcumula\ndinero en tu\nbilletera SOL',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              20,
-                                                      color: Color.fromARGB(
-                                                          255, 226, 227, 226))))
-                                          .animate()
-                                          .fade(),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                        
-                                        
-                                          image: DecorationImage(
-                                            image: AssetImage("lib/imagenes/amigso.png"),
-                                            fit: BoxFit.cover
-                                          )
-                                        ),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                5.5,
-                                       
-                                      )
-                                    ],
-                                  ),
-                                  Text(
-                                    "Comparte tu código\n${codigo}\ncon tus amigos! =)",
-                                    style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width*0.06,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 7, 91, 161)),
-                                  ).animate().shake(),
-                                  Text("* Recuerda que también puedes compartirlo desde la billetera sol *",style: TextStyle(
-                                    color: const Color.fromARGB(255, 3, 76, 135),fontSize: MediaQuery.of(context).size.width*0.023
-                                  ),),
-                                  Center(
-                                    child: Container(
-                                      
-                                        width:
-                                            MediaQuery.of(context).size.width / 2,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                7.5,
-                                                decoration: BoxDecoration(
-                                                  
-                                                  image: DecorationImage(
-                                                    image: AssetImage("lib/imagenes/wallet.png"),
-                                                    fit: BoxFit.contain)
-                                                ),
-                                        ),
-                                  )
-                                ],
-                              )),
-                          Container(
-                            margin: EdgeInsets.only(right: 20),
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                              Colors.blue,
-                              Colors.blue.shade300,
-                              Colors.yellow.shade100,
-                              Colors.white
-                            ])),
-                            width: 370,
-                            height: 70,
-                            child: Column(
-                              children: [
-                                Text(
-                                  "\n\nPuedes usar el código de un amigo para gozar de un descuento, en la compra de un bidón de 20L\n",
-                                  style: GoogleFonts.josefinSans(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                      text: codigo,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ],
-                            ),
+                            width: 350,
+                            color: Colors.blue,
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 20),
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                              Colors.blue,
-                              Colors.blue.shade300,
-                              Colors.yellow.shade100,
-                              Colors.white
-                            ])),
-                            width: 370,
-                            height: 70,
-                            child: Column(
-                              children: [
-                                Text(
-                                  "\n\nTambién puedes gozar de un descuenteo en la compra de tu primer bidón de 20L\n",
-                                  style: GoogleFonts.josefinSans(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                      text: codigo,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ],
-                            ),
+                            width: 350,
+                            color: Colors.green,
+                          ),
+                          Container(
+                            width: 350,
+                            color: Colors.yellow,
+                          ),
+                          Container(
+                            width: 350,
+                            color: Colors.amber,
                           ),
                         ],
                       ),
