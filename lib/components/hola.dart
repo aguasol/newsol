@@ -187,10 +187,28 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           Container(
                             width: 400,
                             color: Colors.yellow,
+                            
                           ),
                           Container(
                             width: 400,
                             color: Colors.amber,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  child: ElevatedButton(onPressed: 
+                                  (){
+                                    
+                                  }, child: Text("Compralo YA!"),
+                                  style: ButtonStyle(
+                                    
+                                    backgroundColor: MaterialStateProperty.all(Colors.grey)
+                                  ),
+                                  
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
