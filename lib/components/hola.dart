@@ -24,6 +24,7 @@ import 'package:lottie/lottie.dart';
 import 'package:appsol_final/models/zona_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Producto {
   final String nombre;
@@ -89,8 +90,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   //ACA SE DEBE ACTUALIZAR LA IMAGEN PARA COMPARTIR EN LOS ESTADOS
   String direccionImagenParaEstados = 'lib/imagenes/12-so-dscto-AGUA-SOL.png';
   //ACA SE DEBE ACTUALIZAR EL LINK PARA DESCARGAR LA APPPPPP
-  String urlPreview = 'https://www.youtube.com/shorts/ombROZ2VXb4';
-  String urlExplicacion = 'https://www.youtube.com/shorts/ombROZ2VXb4';
+  String urlPreview = 'https://youtu.be/EFe9YOZ3YOg?si=1YcKww6EIBJfKnqv';
+  String urlExplicacion = 'https://youtu.be/EFe9YOZ3YOg?si=1YcKww6EIBJfKnqv';
   String tituloUbicacion = 'Gracias por compartir tu ubicación!';
   String contenidoUbicacion = '¡Disfruta de Sol Market!';
   List<String> listPromociones = [];
@@ -170,7 +171,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                     Container(
                       padding: EdgeInsets.all(0),
                       // color: Colors.green,
-                      width: 450,// MediaQuery.of(context).size.width / 1.3,
+                      width: 450, // MediaQuery.of(context).size.width / 1.3,
                       height: MediaQuery.of(context).size.height / 2,
                       child: ListView(
                         controller: _scrollController,
@@ -187,7 +188,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           Container(
                             width: 400,
                             color: Colors.yellow,
-                            
                           ),
                           Container(
                             width: 400,
@@ -196,15 +196,13 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Container(
-                                  child: ElevatedButton(onPressed: 
-                                  (){
-                                    
-                                  }, child: Text("Compralo YA!"),
-                                  style: ButtonStyle(
-                                    
-                                    backgroundColor: MaterialStateProperty.all(Colors.grey)
-                                  ),
-                                  
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("Compralo YA!"),
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.grey)),
                                   ),
                                 ),
                               ],
@@ -223,7 +221,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
-                   /* Positioned(
+                    /* Positioned(
                       top: MediaQuery.of(context).size.width,
                       right: MediaQuery.of(context).size.width / 3.5,
                       child: Container(
@@ -234,7 +232,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           height: MediaQuery.of(context).size.height / 15,
                           child: Lottie.asset("lib/imagenes/manita_left.json")),
                     ),*/
-                   /* Positioned(
+                    /* Positioned(
                         top: MediaQuery.of(context).size.height / 3,
                         left: 50,
                         child: Container(
@@ -243,8 +241,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           child: Lottie.asset("lib/imagenes/ganaste.json"),
                         ))*/
                   ],
-                )
-                );
+                ));
           });
     });
   }
@@ -809,8 +806,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                     Container(
                                       width: anchoActual * 0.13,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Colors.yellow.shade200,
+                                        color: Colors.yellow.shade200,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: IconButton(
@@ -1449,10 +1445,66 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                           .w400),
                                                             ),
                                                             //ESPACIOOO
+                                                            InkWell(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    "Enterate\nmás aquí ",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                      fontStyle:
+                                                                          FontStyle
+                                                                              .normal,
+                                                                      color:
+                                                                          colorLetra,
+                                                                      fontSize:
+                                                                          largoActual *
+                                                                              0.014,
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    child: Image
+                                                                        .asset(
+                                                                            'lib/imagenes/icons8-youtube-48.png'),
+                                                                    height:
+                                                                        anchoActual *
+                                                                            0.09,
+                                                                    width:
+                                                                        anchoActual *
+                                                                            0.09,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              onTap: () async {
+                                                                final Uri url =
+                                                                    Uri.parse(
+                                                                        urlExplicacion);
+                                                                if (!await launchUrl(
+                                                                    url)) {
+                                                                  throw Exception(
+                                                                      'Could not launch $url');
+                                                                }
+                                                              },
+                                                            ),
+
                                                             SizedBox(
-                                                                height:
-                                                                    largoActual *
-                                                                        0.04),
+                                                              height:
+                                                                  anchoActual *
+                                                                      0.022,
+                                                            ),
                                                             //TEXTO EXPLICATIVO
                                                             RichText(
                                                                 text: TextSpan(
@@ -1617,6 +1669,9 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                         side: MaterialStatePropertyAll(BorderSide.none)),
                                                                     onPressed:
                                                                         () async {
+                                                                      var codigo = userProvider
+                                                                          .user
+                                                                          ?.codigocliente;
                                                                       final image =
                                                                           await rootBundle
                                                                               .load(direccionImagenParaEstados);
@@ -1644,7 +1699,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                           )
                                                                         ],
                                                                         subject:
-                                                                            'mi codigo',
+                                                                            'Usa mi codigo:$codigo',
                                                                       );
                                                                     },
                                                                     child: Row(
