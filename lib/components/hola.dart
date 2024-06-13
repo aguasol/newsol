@@ -250,29 +250,9 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
-                    /* Positioned(
-                    /* Positioned(
-                      top: MediaQuery.of(context).size.width,
-                      right: MediaQuery.of(context).size.width / 3.5,
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(85)),
-                          width: MediaQuery.of(context).size.width / 7,
-                          height: MediaQuery.of(context).size.height / 15,
-                          child: Lottie.asset("lib/imagenes/manita_left.json")),
-                    ),*/
-                    /* Positioned(
-                    /* Positioned(
-                        top: MediaQuery.of(context).size.height / 3,
-                        left: 50,
-                        child: Container(
-                          height: 300,
-                          width: 300,
-                          child: Lottie.asset("lib/imagenes/ganaste.json"),
-                        ))*/
+                    
                   ],
-                ));
+                
                 ));
           });
     });
@@ -838,7 +818,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                     Container(
                                       width: anchoActual * 0.13,
                                       decoration: BoxDecoration(
-                                        color: Colors.yellow.shade200,
                                         color: Colors.yellow.shade200,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
