@@ -100,10 +100,11 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
 
   ScrollController scrollController1 = ScrollController();
   ScrollController scrollController2 = ScrollController();
-  DateTime fechaLimite = DateTime.now();
 
-  final ScrollController _scrollController = ScrollController();
+  // Define un controlador global
+  FixedExtentScrollController scrollController = FixedExtentScrollController();
   Timer? _timer;
+  DateTime fechaLimite = DateTime.now();
 
   DateTime mesyAnio(String? fecha) {
     if (fecha is String) {
@@ -113,22 +114,18 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     }
   }
 
-  void _startAutoScroll() {
-    _timer = Timer.periodic(Duration(seconds: 2), (timer) {
-      if (_scrollController.hasClients) {
-        double maxScroll = _scrollController.position.maxScrollExtent;
-        double currentScroll = _scrollController.position.pixels;
-        double scrollAmount = 200.0; // Cantidad de desplazamiento
-
-        if (currentScroll >= maxScroll) {
-          _scrollController.jumpTo(0);
-        } else {
-          _scrollController.animateTo(
-            currentScroll + scrollAmount,
-            duration: Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          );
-        }
+  void iniciarTemporizador(BuildContext context) {
+    // Temporizador para el desplazamiento automático
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (scrollController.hasClients) {
+        scrollController.animateToItem(
+          (scrollController.initialScrollOffset /
+                      (MediaQuery.of(context).size.height / 3))
+                  .round() +
+              1,
+          duration: Duration(seconds: 1),
+          curve: Curves.easeInOut,
+        );
       }
     });
   }
@@ -139,14 +136,16 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     scrollController1.dispose();
     scrollController2.dispose();
     _timer?.cancel();
-    _scrollController.dispose();
+    scrollController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _startAutoScroll();
 
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      iniciarTemporizador(context);
+    });
     ordenarFuncionesInit();
   }
 
@@ -158,72 +157,99 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showDialog(
+          barrierColor: Colors.grey.withOpacity(0.41),
           context: context,
           builder: (context) {
             return Dialog(
+                backgroundColor: Colors.blue.withOpacity(0.3),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(0),
+                      //padding: EdgeInsets.all(0),
                       // color: Colors.green,
-                      width: 450,// MediaQuery.of(context).size.width / 1.3,
+                      width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 2,
-                      child: ListView(
-                        controller: _scrollController,
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Container(
-                            width: 400,
-                            color: Colors.blue,
-                          ),
-                          Container(
-                            width: 400,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            width: 400,
-                            color: Colors.yellow,
-                            
-                          ),
-                          Container(
-                            width: 400,
-                            color: Colors.amber,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  child: ElevatedButton(onPressed: 
-                                  (){
-                                    
-                                  }, child: Text("Compralo YA!"),
-                                  style: ButtonStyle(
-                                    
-                                    backgroundColor: MaterialStateProperty.all(Colors.grey)
-                                  ),
-                                  
-                                  ),
-                                ),
-                              ],
+                      child: RotatedBox(
+                        quarterTurns: -1,
+                        child: ListWheelScrollView(
+                          itemExtent: MediaQuery.of(context).size.height / 3,
+                          controller: scrollController,
+                          children: [
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 2.2,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 250, 251, 252),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(child: Text("item")),
+                              ),
                             ),
-                          ),
-                        ],
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 2.3,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 250, 251, 252),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(child: Text("item")),
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 2.3,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 250, 251, 252),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(child: Text("item")),
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 2.3,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 250, 251, 252),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Item 1"),
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        child: Text("Llevalo ya!"))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Positioned(
                       top: -MediaQuery.of(context).size.width / 3.5,
-                      left: -MediaQuery.of(context).size.width / 9,
+                      left: -MediaQuery.of(context).size.width / 20,
                       child: Container(
                         // color: Colors.yellow,
-                        width: MediaQuery.of(context).size.width / 5,
-                        height: MediaQuery.of(context).size.height / 5,
+                        width: MediaQuery.of(context).size.width / 6,
+                        height: MediaQuery.of(context).size.height / 6,
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
-                   /* Positioned(
+                    /* Positioned(
                       top: MediaQuery.of(context).size.width,
                       right: MediaQuery.of(context).size.width / 3.5,
                       child: Container(
@@ -234,7 +260,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           height: MediaQuery.of(context).size.height / 15,
                           child: Lottie.asset("lib/imagenes/manita_left.json")),
                     ),*/
-                   /* Positioned(
+                    /* Positioned(
                         top: MediaQuery.of(context).size.height / 3,
                         left: 50,
                         child: Container(
@@ -243,8 +269,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           child: Lottie.asset("lib/imagenes/ganaste.json"),
                         ))*/
                   ],
-                )
-                );
+                ));
           });
     });
   }
@@ -809,8 +834,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                     Container(
                                       width: anchoActual * 0.13,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Colors.yellow.shade200,
+                                        color: Colors.yellow.shade200,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: IconButton(
@@ -1140,18 +1164,30 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                             ),
                             Container(
                               margin: EdgeInsets.only(right: 5),
-                              width: 60,
-                              height: 60,
+                              width: MediaQuery.of(context).size.width / 7,
+                              //height: 60,
                               decoration: BoxDecoration(
-                                  //color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: IconButton(
-                                iconSize: 5,
-                                icon: Image(
-                                    image: AssetImage("lib/imagenes/info.png")),
-                                onPressed: () async {
-                                  await muestraDialogoPubli(context);
-                                },
+                                  // color: Colors.grey,
+                                  ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    icon:
+                                        Lottie.asset("lib/imagenes/infos.json"),
+                                    onPressed: () async {
+                                      await muestraDialogoPubli(context);
+                                    },
+                                  ),
+                                  Text("+Información",
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              45,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue.shade600))
+                                ],
                               ),
                             ).animate().shake().fade()
                           ],
