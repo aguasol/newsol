@@ -25,15 +25,16 @@ import 'package:appsol_final/models/zona_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:appsol_final/models/producto_model.dart';
 
-class Producto {
+class ProductoHola {
   final String nombre;
   final double precio;
   final String descripcion;
 
   final String foto;
 
-  Producto(
+  ProductoHola(
       {required this.nombre,
       required this.precio,
       required this.descripcion,
@@ -65,7 +66,7 @@ class Hola2 extends StatefulWidget {
 class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   String apiUrl = dotenv.env['API_URL'] ?? '';
   String apiZona = '/api/zona';
-  List<Producto> listProducto = [];
+  List<ProductoHola> listProducto = [];
   double? latitudUser = 0.0;
   double? longitudUser = 0.0;
   int? zonaIDUbicacion = 0;
@@ -95,6 +96,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   String tituloUbicacion = 'Gracias por compartir tu ubicación!';
   String contenidoUbicacion = '¡Disfruta de Sol Market!';
   List<String> listPromociones = [];
+
+  List<Producto> bidonProducto = [];
 
   //bool _disposed = false;
   //bool _autoScrollInProgress = false;
@@ -178,7 +181,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         quarterTurns: -1,
                         child: ListWheelScrollView(
                           itemExtent: MediaQuery.of(context).size.height / 3,
-                          controller: scrollController,
+                          //controller: scrollController,
                           children: [
                             RotatedBox(
                               quarterTurns: 1,
@@ -229,9 +232,45 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text("Item 1"),
+                                    /////////////////
                                     ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          final pedidoProvider =
+                                              Provider.of<PedidoProvider>(
+                                                  context,
+                                                  listen: false);
+                                          print("BIDON PRODUCT------------");
+                                          print(bidonProducto[0].id);
+                                          print("cantidad");
+                                          print(bidonProducto[0].cantidad);
+                                          print(bidonProducto[0].nombre);
+                                          print(bidonProducto[0].precio);
+                                          print(bidonProducto[0].promoID);
+                                          print(bidonProducto[0].cantidadRequeridaParaRuta);
+                                        bidonProducto[0].cantidad = 1;
+
+
+                                          PedidoModel newPedido = PedidoModel(
+                                              seleccionados: bidonProducto,
+                                              seleccionadosPromo: [],
+                                              cantidadProd: bidonProducto[0].cantidad,
+                                              totalProds: bidonProducto[0].precio * bidonProducto[0].cantidad,
+                                              envio: 0);
+
+                                          // SE ENVIA EL PROVIDER ACTUAL    
+                                          pedidoProvider.updatePedido(newPedido);
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Pedido()
+                                                //const Promos()
+                                                ),
+                                          );
+                                        },
                                         child: Text("Llevalo ya!"))
+                                    /////////////////
                                   ],
                                 ),
                               ),
@@ -250,9 +289,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                         child: Image.asset('lib/imagenes/BIDON20.png'),
                       ).animate().fade().shake(),
                     ),
-                    
                   ],
-                
                 ));
           });
     });
@@ -274,7 +311,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   Future<void> ordenarFuncionesInit() async {
     await _cargarPreferencias();
     await getUbicaciones(widget.clienteId);
-    await getProducts();
+   await getProducts();
     await getZonas();
     await getPromociones();
     if (widget.esNuevo != null &&
@@ -692,8 +729,18 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     try {
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        List<Producto> tempProducto = data.map<Producto>((mapa) {
+        List<ProductoHola> tempProducto = data.map<ProductoHola>((mapa) {
+          return ProductoHola(
+            nombre: 'hoalalalalalalala',//mapa['nombre'],
+            precio: mapa['precio'].toDouble(),
+            descripcion: mapa['descripcion'],
+            foto: '$apiUrl/images/${mapa['foto']}',
+          );
+        }).toList();
+
+        List<Producto> tempProdProvider = data.map<Producto>((mapa) {
           return Producto(
+            id: mapa['id'],
             nombre: mapa['nombre'],
             precio: mapa['precio'].toDouble(),
             descripcion: mapa['descripcion'],
@@ -705,6 +752,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
         if (mounted) {
           setState(() {
             listProducto = tempProducto;
+            bidonProducto = [tempProdProvider[0]];
             //conductores = tempConductor;
           });
         }
