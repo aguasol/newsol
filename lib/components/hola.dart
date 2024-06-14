@@ -231,7 +231,63 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Item 1"),
+                                    Text("Vista de 1ER BIDÓN"),
+                                    /////////////////
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          final pedidoProvider =
+                                              Provider.of<PedidoProvider>(
+                                                  context,
+                                                  listen: false);
+                                          print("BIDON PRODUCT------------");
+                                          print(bidonProducto[0].id);
+                                          print("cantidad");
+                                          print(bidonProducto[0].cantidad);
+                                          print(bidonProducto[0].nombre);
+                                          print(bidonProducto[0].precio);
+                                          print(bidonProducto[0].promoID);
+                                          print(bidonProducto[0].cantidadRequeridaParaRuta);
+                                        bidonProducto[0].cantidad = 1;
+
+
+                                          PedidoModel newPedido = PedidoModel(
+                                              seleccionados: bidonProducto,
+                                              seleccionadosPromo: [],
+                                              cantidadProd: bidonProducto[0].cantidad,
+                                              totalProds: bidonProducto[0].precio * bidonProducto[0].cantidad,
+                                              envio: 0);
+
+                                          // SE ENVIA EL PROVIDER ACTUAL    
+                                          pedidoProvider.updatePedido(newPedido);
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Pedido()
+                                                //const Promos()
+                                                ),
+                                          );
+                                        },
+                                        child: Text("Llevalo ya!"))
+                                    /////////////////
+                                  ],
+                                ),
+                              ),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 2.3,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 250, 251, 252),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Vista de  BIDÓN + CÓDIGO"),
                                     /////////////////
                                     ElevatedButton(
                                         onPressed: () {

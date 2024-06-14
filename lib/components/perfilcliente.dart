@@ -148,7 +148,7 @@ class _PerfilCliente extends State<PerfilCliente> {
                   ),
 
                   SizedBox(
-                    width: anchoActual * 0.65,
+                    width: anchoActual * 0.45,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,6 +178,25 @@ class _PerfilCliente extends State<PerfilCliente> {
                               fontSize: largoActual * 0.018,
                               color: colorTitulos),
                         ),
+                      ],
+                    ),
+                  )
+
+                  ,Container(
+                    width: MediaQuery.of(context).size.width/6,
+                    height: MediaQuery.of(context).size.height/5.5,
+                    //color: Colors.grey,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("lib/imagenes/BIDON20.png"),
+                              fit: BoxFit.fill)
+                          ),),
+                        Container(
+                          child: Text("")),
                       ],
                     ),
                   )
