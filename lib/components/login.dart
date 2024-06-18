@@ -57,6 +57,7 @@ class _LoginState extends State<Login> {
   String fechaNacimientoKey = "fecha_nacimiento";
   String fechaCreacionCuentaKey = "fecha_creacion_cuenta";
   String sexoKey = "sexo";
+  String numrecargas = "";
 
   Future<User?> _signInWithFacebook() async {
     try {
@@ -153,6 +154,24 @@ class _LoginState extends State<Login> {
     });
   }
 
+  Future<dynamic> recargas(clienteID) async {
+    var res = await http.get(
+      Uri.parse(apiUrl + '/api/cliente/recargas/' + clienteID.toString()),
+      headers: {"Content-type": "application/json"},
+    );
+    try {
+      if (res.statusCode == 200) {
+        var data = json.decode(res.body);
+        setState(() {
+          numrecargas = data[0]['recargas'];
+        });
+      }
+    } catch (e) {
+      print('Error en la solicitud: $e');
+      throw Exception('Error en la solicitud: $e');
+    }
+  }
+
   Future<dynamic> loginsol(username, password) async {
     try {
       print("------loginsool");
@@ -197,6 +216,7 @@ class _LoginState extends State<Login> {
           print("userData");
           // data['usuario']['nombre']
           print(data['usuario']['id']);
+          await recargas(data['usuario']['id']);
           userData = UserModel(
               id: data['usuario']['id'],
               nombre: data['usuario']['nombre'],
@@ -210,7 +230,8 @@ class _LoginState extends State<Login> {
               quiereRetirar: data['usuario']['quiereretirar'],
               suscripcion: data['usuario']['suscripcion'] ?? 'Sin suscripción',
               token: data['token'],
-              rolid: data['usuario']['rol_id']);
+              rolid: data['usuario']['rol_id'],
+              recargas: numrecargas);
           print(userData);
           print("-----------------------------------------------------------");
           setState(() {

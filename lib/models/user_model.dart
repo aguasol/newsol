@@ -20,6 +20,7 @@ class UserModel {
   bool esNuevo;
   String? token;
   int? rolid;
+  String? recargas;
 
   // Agrega más atributos según sea necesario
 
@@ -39,7 +40,8 @@ class UserModel {
       this.quiereRetirar,
       this.esNuevo = false,
       this.token,
-      this.rolid
+      this.rolid,
+      this.recargas
       // Agrega más parámetros según sea necesario
       });
 
@@ -82,7 +84,8 @@ class UserModel {
         codigocliente: json['codigocliente'],
         fechaCreacionCuenta: json['fechaCreacionCuenta'],
         suscripcion: json['suscripcion'],
-        rolid: json['rolid'] ?? 0
+        rolid: json['rolid'] ?? 0,
+        recargas: json['recargas'] ?? ''
         // Agrega más inicializaciones según sea necesario
         );
   }
@@ -95,7 +98,8 @@ class UserModel {
       'codigocliente': codigocliente,
       'fechaCreacionCuenta': fechaCreacionCuenta,
       'suscripcion': suscripcion,
-      'rolid': rolid
+      'rolid': rolid,
+      'recargas': recargas
     };
   }
 }

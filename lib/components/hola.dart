@@ -106,7 +106,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   ScrollController scrollController2 = ScrollController();
 
   // Define un controlador global
-  FixedExtentScrollController scrollController = FixedExtentScrollController();
+  FixedExtentScrollController _scrollController = FixedExtentScrollController();
   Timer? _timer;
   DateTime fechaLimite = DateTime.now();
 
@@ -118,38 +118,17 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     }
   }
 
-  void iniciarTemporizador(BuildContext context) {
-    // Temporizador para el desplazamiento automático
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (scrollController.hasClients) {
-        scrollController.animateToItem(
-          (scrollController.initialScrollOffset /
-                      (MediaQuery.of(context).size.height / 3))
-                  .round() +
-              1,
-          duration: Duration(seconds: 1),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
   @override
   void dispose() {
     super.dispose();
     scrollController1.dispose();
     scrollController2.dispose();
     _timer?.cancel();
-    scrollController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      iniciarTemporizador(context);
-    });
     ordenarFuncionesInit();
   }
 
@@ -176,18 +155,93 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                       //padding: EdgeInsets.all(0),
                       // color: Colors.green,
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height / 2,
+                      height: MediaQuery.of(context).size.height / 1.34,
                       child: RotatedBox(
                         quarterTurns: -1,
                         child: ListWheelScrollView(
                           itemExtent: MediaQuery.of(context).size.height / 3,
-                          //controller: scrollController,
+                          controller: _scrollController,
                           children: [
                             RotatedBox(
                               quarterTurns: 1,
                               child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.57,
+                                  decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 250, 251, 252),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        // padding: EdgeInsets.all(20),
+                                        //color: Colors.amber,),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: AssetImage(
+                                                    'lib/imagenes/codigo_entra.jpg'))),
+                                      ),
+                                      Positioned(
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.75,
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.85,
+                                          child: Text(
+                                            "dataGGG",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                color: Colors.amber),
+                                          )),
+                                      Positioned(
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3,
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3.85,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                color: Colors.blue),
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  // Hacer scroll al siguiente elemento
+                                                  final currentPosition =
+                                                      _scrollController.offset;
+                                                  final itemExtent =
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          3;
+                                                  _scrollController.animateTo(
+                                                    currentPosition +
+                                                        itemExtent,
+                                                    duration:
+                                                        Duration(seconds: 1),
+                                                    curve: Curves.easeInOut,
+                                                  );
+                                                },
+                                                child: Text("->")),
+                                          ))
+
+                                      //child: Image(image: AssetImage('lib/imagenes/codigo_entra.jpg')))
+                                    ],
+                                  )),
+                            ),
+                            RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 2.2,
+                                    MediaQuery.of(context).size.height / 1.57,
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                         255, 250, 251, 252),
@@ -199,7 +253,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               quarterTurns: 1,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 2.3,
+                                    MediaQuery.of(context).size.height / 1.57,
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                         255, 250, 251, 252),
@@ -211,19 +265,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               quarterTurns: 1,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 2.3,
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 250, 251, 252),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(child: Text("item")),
-                              ),
-                            ),
-                            RotatedBox(
-                              quarterTurns: 1,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height / 2.3,
+                                    MediaQuery.of(context).size.height / 1.57,
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                         255, 250, 251, 252),
@@ -246,19 +288,23 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                           print(bidonProducto[0].nombre);
                                           print(bidonProducto[0].precio);
                                           print(bidonProducto[0].promoID);
-                                          print(bidonProducto[0].cantidadRequeridaParaRuta);
-                                        bidonProducto[0].cantidad = 1;
-
+                                          print(bidonProducto[0]
+                                              .cantidadRequeridaParaRuta);
+                                          bidonProducto[0].cantidad = 1;
 
                                           PedidoModel newPedido = PedidoModel(
                                               seleccionados: bidonProducto,
                                               seleccionadosPromo: [],
-                                              cantidadProd: bidonProducto[0].cantidad,
-                                              totalProds: bidonProducto[0].precio * bidonProducto[0].cantidad,
+                                              cantidadProd:
+                                                  bidonProducto[0].cantidad,
+                                              totalProds:
+                                                  bidonProducto[0].precio *
+                                                      bidonProducto[0].cantidad,
                                               envio: 0);
 
-                                          // SE ENVIA EL PROVIDER ACTUAL    
-                                          pedidoProvider.updatePedido(newPedido);
+                                          // SE ENVIA EL PROVIDER ACTUAL
+                                          pedidoProvider
+                                              .updatePedido(newPedido);
 
                                           Navigator.push(
                                             context,
@@ -279,7 +325,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               quarterTurns: 1,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 2.3,
+                                    MediaQuery.of(context).size.height / 1.57,
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                         255, 250, 251, 252),
@@ -302,19 +348,23 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                           print(bidonProducto[0].nombre);
                                           print(bidonProducto[0].precio);
                                           print(bidonProducto[0].promoID);
-                                          print(bidonProducto[0].cantidadRequeridaParaRuta);
-                                        bidonProducto[0].cantidad = 1;
-
+                                          print(bidonProducto[0]
+                                              .cantidadRequeridaParaRuta);
+                                          bidonProducto[0].cantidad = 1;
 
                                           PedidoModel newPedido = PedidoModel(
                                               seleccionados: bidonProducto,
                                               seleccionadosPromo: [],
-                                              cantidadProd: bidonProducto[0].cantidad,
-                                              totalProds: bidonProducto[0].precio * bidonProducto[0].cantidad,
+                                              cantidadProd:
+                                                  bidonProducto[0].cantidad,
+                                              totalProds:
+                                                  bidonProducto[0].precio *
+                                                      bidonProducto[0].cantidad,
                                               envio: 0);
 
-                                          // SE ENVIA EL PROVIDER ACTUAL    
-                                          pedidoProvider.updatePedido(newPedido);
+                                          // SE ENVIA EL PROVIDER ACTUAL
+                                          pedidoProvider
+                                              .updatePedido(newPedido);
 
                                           Navigator.push(
                                             context,
@@ -334,16 +384,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: -MediaQuery.of(context).size.width / 3.5,
-                      left: -MediaQuery.of(context).size.width / 20,
-                      child: Container(
-                        // color: Colors.yellow,
-                        width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 6,
-                        child: Image.asset('lib/imagenes/BIDON20.png'),
-                      ).animate().fade().shake(),
                     ),
                   ],
                 ));
@@ -367,7 +407,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   Future<void> ordenarFuncionesInit() async {
     await _cargarPreferencias();
     await getUbicaciones(widget.clienteId);
-   await getProducts();
+    await getProducts();
     await getZonas();
     await getPromociones();
     if (widget.esNuevo != null &&
@@ -787,7 +827,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
         var data = json.decode(res.body);
         List<ProductoHola> tempProducto = data.map<ProductoHola>((mapa) {
           return ProductoHola(
-            nombre: 'hoalalalalalalala',//mapa['nombre'],
+            nombre: 'hoalalalalalalala', //mapa['nombre'],
             precio: mapa['precio'].toDouble(),
             descripcion: mapa['descripcion'],
             foto: '$apiUrl/images/${mapa['foto']}',
@@ -1251,30 +1291,37 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                               ],
                             ),
                             Container(
-                              margin: EdgeInsets.only(right: 5),
-                              width: MediaQuery.of(context).size.width / 7,
+                              margin: EdgeInsets.only(right: 1),
+                              width: MediaQuery.of(context).size.width / 7.5,
                               //height: 60,
                               decoration: BoxDecoration(
-                                  // color: Colors.grey,
+                                  //color: Colors.grey,
                                   ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  IconButton(
-                                    icon:
-                                        Lottie.asset("lib/imagenes/infos.json"),
-                                    onPressed: () async {
-                                      await muestraDialogoPubli(context);
-                                    },
+                                  Container(
+                                    margin: EdgeInsets.only(left: 3),
+                                    // height: largoActual * 0.059,
+                                    width: largoActual * 0.059,
+                                    //color: Colors.green.shade100,
+                                    child: IconButton(
+                                      icon: Lottie.asset(
+                                          "lib/imagenes/infos.json"),
+                                      onPressed: () async {
+                                        await muestraDialogoPubli(context);
+                                      },
+                                    ),
                                   ),
-                                  Text("+Información",
+                                  Text("+ Info",
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              45,
+                                              30,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.blue.shade600))
+                                          color: Color.fromRGBO(
+                                              0, 106, 252, 1.000)))
                                 ],
                               ),
                             ).animate().shake().fade()
@@ -1558,7 +1605,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                             ),
                                                             //TEXTO CON AGUA SOL PUEDES LOGRARLO
                                                             Text(
-                                                              '¡Con Sol Market puedes lograrlo!',
+                                                              '¡Con Sol Market puedes',
                                                               style: TextStyle(
                                                                   fontStyle:
                                                                       FontStyle
@@ -1572,66 +1619,93 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                       FontWeight
                                                                           .w400),
                                                             ),
-                                                            //ESPACIOOO
-                                                            InkWell(
-                                                              child: Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .end,
-                                                                children: [
-                                                                  Text(
-                                                                    "Enterate\nmás aquí ",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800,
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .normal,
-                                                                      color:
-                                                                          colorLetra,
-                                                                      fontSize:
-                                                                          largoActual *
-                                                                              0.014,
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                //ESPACIOOO
+                                                                Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      'lograrlo!',
+                                                                      style: TextStyle(
+                                                                          fontStyle: FontStyle
+                                                                              .italic,
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize: largoActual *
+                                                                              0.025,
+                                                                          fontWeight:
+                                                                              FontWeight.w400),
                                                                     ),
-                                                                  ),
-                                                                  Container(
-                                                                    child: Image
-                                                                        .asset(
+                                                                    SizedBox(
+                                                                      height: largoActual *
+                                                                          0.046,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                InkWell(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      RichText(
+                                                                        text:
+                                                                            TextSpan(
+                                                                          children: [
+                                                                            TextSpan(
+                                                                              text: '         video',
+                                                                              style: TextStyle(
+                                                                                fontWeight: FontWeight.w800,
+                                                                                fontStyle: FontStyle.normal,
+                                                                                color: colorLetra,
+                                                                                fontSize: largoActual * 0.014,
+                                                                                height: 0.3, // Esto controla la altura de la línea para "video"
+                                                                              ),
+                                                                            ),
+                                                                            TextSpan(
+                                                                              text: '\nexplicativo ',
+                                                                              style: TextStyle(
+                                                                                fontWeight: FontWeight.w800,
+                                                                                fontStyle: FontStyle.normal,
+                                                                                color: colorLetra,
+                                                                                fontSize: largoActual * 0.014,
+                                                                                height: 1.13, // Esto controla la altura de la línea para "explicativo"
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Container(
+                                                                        child: Image.asset(
                                                                             'lib/imagenes/icons8-youtube-48.png'),
-                                                                    height:
-                                                                        anchoActual *
-                                                                            0.09,
-                                                                    width:
-                                                                        anchoActual *
-                                                                            0.09,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
+                                                                        height: anchoActual *
+                                                                            0.13,
+                                                                        width: anchoActual *
+                                                                            0.13,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(6),
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                ],
-                                                              ),
-                                                              onTap: () async {
-                                                                final Uri url =
-                                                                    Uri.parse(
-                                                                        urlExplicacion);
-                                                                if (!await launchUrl(
-                                                                    url)) {
-                                                                  throw Exception(
-                                                                      'Could not launch $url');
-                                                                }
-                                                              },
-                                                            ),
-
-                                                            SizedBox(
-                                                              height:
-                                                                  anchoActual *
-                                                                      0.022,
+                                                                  onTap:
+                                                                      () async {
+                                                                    final Uri
+                                                                        url =
+                                                                        Uri.parse(
+                                                                            urlExplicacion);
+                                                                    if (!await launchUrl(
+                                                                        url)) {
+                                                                      throw Exception(
+                                                                          'Could not launch $url');
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ],
                                                             ),
                                                             //TEXTO EXPLICATIVO
                                                             RichText(
@@ -1827,7 +1901,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                           )
                                                                         ],
                                                                         subject:
-                                                                            'Usa mi codigo:$codigo',
+                                                                            'Usa mi codigo: $codigo',
                                                                       );
                                                                     },
                                                                     child: Row(

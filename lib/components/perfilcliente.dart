@@ -37,6 +37,7 @@ class _PerfilCliente extends State<PerfilCliente> {
   String apiCliente = '/api/cliente/';
   DateTime fechaLimite = DateTime.now();
   TextEditingController numeroDeCuenta = TextEditingController();
+  String numrecargas = '';
   DateTime mesyAnio(String? fecha) {
     if (fecha is String) {
       print('es string');
@@ -180,26 +181,8 @@ class _PerfilCliente extends State<PerfilCliente> {
                         ),
                       ],
                     ),
-                  )
-
-                  ,Container(
-                    width: MediaQuery.of(context).size.width/6,
-                    height: MediaQuery.of(context).size.height/5.5,
-                    //color: Colors.grey,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 150,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("lib/imagenes/BIDON20.png"),
-                              fit: BoxFit.fill)
-                          ),),
-                        Container(
-                          child: Text("")),
-                      ],
-                    ),
-                  )
+                  ), /*
+                  */
                 ],
               ),
 
@@ -207,95 +190,115 @@ class _PerfilCliente extends State<PerfilCliente> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Expanded(
+                    flex: 2,
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                            barrierColor: Colors.grey.withOpacity(0.41),
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: Container(
+                                  child: Text("texto"),
+                                ),
+                              );
+                            });
+                      },
+                      child: Card(
+                          margin: EdgeInsets.only(right: anchoActual * 0.09),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          surfaceTintColor: Colors.white,
+                          color: Colors.white,
+                          elevation: 8,
+                          child: Row(
+                            children: [
+                              Container(
+                                  padding:
+                                      EdgeInsets.only(left: anchoActual * 0.07),
+                                  child: RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                      text: "${userProvider.user?.recargas}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: largoActual * 0.06,
+                                          color: colorTitulos,
+                                          height: 0.28),
+                                    ),
+                                    TextSpan(
+                                      text: "\nrecargas",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: largoActual * 0.016,
+                                          color: colorTitulos),
+                                    ),
+                                    TextSpan(
+                                      text: "\no oportunidades",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: largoActual * 0.016,
+                                          color: colorTitulos),
+                                    )
+                                  ]))),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 5.8,
+                                width: MediaQuery.of(context).size.width / 6,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "lib/imagenes/BIDON20.png"),
+                                        fit: BoxFit.fill)),
+                              ),
+                            ],
+                          ) /*Container(
+                            //color: Colors.grey,
+                            child: Column(
+                              children: [
+                              ],
+                            ),
+                          )*/
+                          ),
+                    ),
+                  ),
+
                   //CARD DE INFO PERSONAL
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      surfaceTintColor: Colors.white,
-                      color: Colors.white,
-                      elevation: 8,
-                      child: Container(
-                        margin: EdgeInsets.all(anchoActual * 0.02),
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                //ACA ACCIONES
-                              },
-                              icon: Icon(
-                                Icons.person_2_outlined,
-                                color: colorLetra,
-                                size: anchoActual * 0.11,
-                              ),
-                            ),
-                            Text(
-                              'Info. Pesonal',
-                              style: TextStyle(
+                  Expanded(
+                    flex: 1,
+                    child: Card(
+                        margin: EdgeInsets.only(left: anchoActual * 0.05),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        surfaceTintColor: Colors.white,
+                        color: Colors.white,
+                        elevation: 8,
+                        child: Container(
+                          margin: EdgeInsets.all(anchoActual * 0.02),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  //ACA ACCIONES
+                                },
+                                icon: Icon(
+                                  Icons.person_2_outlined,
                                   color: colorLetra,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: largoActual * 0.015),
-                            ),
-                          ],
-                        ),
-                      )),
-                  //CARD DE MEMBRESOL
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      surfaceTintColor: Colors.white,
-                      color: Colors.white,
-                      elevation: 8,
-                      child: Container(
-                        margin: EdgeInsets.all(anchoActual * 0.02),
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.beach_access_outlined,
-                                size: anchoActual * 0.11,
-                                color: colorLetra,
+                                  size: anchoActual * 0.11,
+                                ),
                               ),
-                            ),
-                            Text(
-                              ' Membre Sol ',
-                              style: TextStyle(
-                                  color: colorLetra,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: largoActual * 0.015),
-                            ),
-                          ],
-                        ),
-                      )),
-                  //CARD DE CUPONES
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      surfaceTintColor: Colors.white,
-                      color: Colors.white,
-                      elevation: 8,
-                      child: Container(
-                        margin: EdgeInsets.all(anchoActual * 0.02),
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.discount_outlined,
-                                color: colorLetra,
-                                size: anchoActual * 0.11,
+                              Text(
+                                'Info. Personal',
+                                style: TextStyle(
+                                    color: colorLetra,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: largoActual * 0.015),
                               ),
-                            ),
-                            Text(
-                              '    Cupones    ',
-                              style: TextStyle(
-                                  color: colorLetra,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: largoActual * 0.015),
-                            ),
-                          ],
-                        ),
-                      )),
+                            ],
+                          ),
+                        )),
+                  ),
                 ],
               ),
 
