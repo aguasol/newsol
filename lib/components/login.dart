@@ -162,9 +162,15 @@ class _LoginState extends State<Login> {
     try {
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        setState(() {
-          numrecargas = data[0]['recargas'];
-        });
+        if (data != null) {
+          setState(() {
+            numrecargas = data['recargas'];
+          });
+        } else {
+          setState(() {
+            numrecargas = '0';
+          });
+        }
       }
     } catch (e) {
       print('Error en la solicitud: $e');
