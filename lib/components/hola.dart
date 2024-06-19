@@ -72,6 +72,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   int? zonaIDUbicacion = 0;
   int? clienteID = 0;
   bool? yaSeMostro = false;
+  bool? yaComproBidon = false;
   List<UbicacionModel> listUbicacionesObjetos = [];
   List<String> ubicacionesString = [];
   String? _ubicacionSelected;
@@ -192,7 +193,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                   .width /
                                               3.85,
                                           child: Text(
-                                            "dataGGG",
+                                            "${codigo}",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
@@ -393,6 +394,10 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
 
   _cargarPreferencias() async {
     SharedPreferences yasemostroPubli = await SharedPreferences.getInstance();
+    // BIDON COMPRADO ?
+    SharedPreferences bidonCliente = await SharedPreferences.getInstance();
+    yaComproBidon = bidonCliente.getBool('comproBidon');
+
     if (yasemostroPubli.getBool("ya") != null) {
       setState(() {
         yaSeMostro = yasemostroPubli.getBool("ya");
@@ -410,9 +415,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     await getProducts();
     await getZonas();
     await getPromociones();
-    if (widget.esNuevo != null &&
-        widget.esNuevo == true &&
-        yaSeMostro == false) {
+    if (widget.esNuevo != null && widget.esNuevo == true && yaSeMostro == false && yaComproBidon == false) {
+      print(".....ENTRANDO Y LLAMANDO");
       await muestraDialogoPubli(context);
     } else {
       print("+++++++++++++++++++++++++++++++++++++++++");
