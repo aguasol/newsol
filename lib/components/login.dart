@@ -59,6 +59,29 @@ class _LoginState extends State<Login> {
   String sexoKey = "sexo";
   String numrecargas = "";
 
+  Future<dynamic> getBidonCliente(clienteID) async {
+    try {
+      var res = await http.get(
+        Uri.parse(apiUrl + '/api/clientebidones/' + clienteID.toString()),
+        headers: {"Content-type": "application/json"},
+      );
+      SharedPreferences bidonCliente = await SharedPreferences.getInstance();
+
+     if (res.statusCode == 200) {
+        var data = json.decode(res.body);
+        if (data == null) {
+          
+          bidonCliente.setBool('comproBidon', false);
+          
+        } else {
+          bidonCliente.setBool('comproBidon', true);
+        }
+      }
+    } catch (e) {
+      throw Exception("Error ${e}");
+    }
+  }
+
   Future<User?> _signInWithFacebook() async {
     try {
       // Iniciar sesión con Facebook
@@ -155,11 +178,12 @@ class _LoginState extends State<Login> {
   }
 
   Future<dynamic> recargas(clienteID) async {
-    var res = await http.get(
+   
+    try {
+       var res = await http.get(
       Uri.parse(apiUrl + '/api/cliente/recargas/' + clienteID.toString()),
       headers: {"Content-type": "application/json"},
     );
-    try {
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
         if (data != null) {
@@ -223,6 +247,7 @@ class _LoginState extends State<Login> {
           // data['usuario']['nombre']
           print(data['usuario']['id']);
           await recargas(data['usuario']['id']);
+          await getBidonCliente(data['usuario']['id']);
           userData = UserModel(
               id: data['usuario']['id'],
               nombre: data['usuario']['nombre'],
