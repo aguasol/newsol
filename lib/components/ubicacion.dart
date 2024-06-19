@@ -549,10 +549,12 @@ class _UbicacionState extends State<Ubicacion> {
                                 builder: (BuildContext context) {
                                   return const AlertDialog(
                                     content: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         CircularProgressIndicator(
                                           backgroundColor: Color.fromARGB(255, 19, 65, 78),
                                         ),
+                                        Text("Cargando ...")
                                        
                                       ],
                                     ),

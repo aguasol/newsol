@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'package:appsol_final/components/login.dart';
+import 'package:appsol_final/provider/user_provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
 
 class Formu extends StatefulWidget {
   const Formu({super.key});
@@ -75,6 +78,7 @@ class _FormuState extends State<Formu> {
             "banco_retiro": "NA",
             "numero_cuenta": "NA"
           }));
+      
     } catch (e) {
       throw Exception('$e');
     }
@@ -90,6 +94,8 @@ class _FormuState extends State<Formu> {
     double tamanoHint = largoActual * 0.018;
     DateTime tiempoActual = DateTime.now();
     Color textoIngreso = Color.fromARGB(255, 84, 84, 84);
+    final userProvider = context.watch<UserProvider>();
+
     return Scaffold(
         body: DecoratedBox(
       decoration: const BoxDecoration(
@@ -515,6 +521,8 @@ class _FormuState extends State<Formu> {
                                 _email.text,
                                 _telefono.text,
                                 _ruc.text);
+                                // USUARIO NUEVO PARA CONTROL DE BIDON
+                                userProvider.user?.esNuevo = true;
 
                             Navigator.push(
                               context,

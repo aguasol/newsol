@@ -67,14 +67,16 @@ class _LoginState extends State<Login> {
       );
       SharedPreferences bidonCliente = await SharedPreferences.getInstance();
 
-     if (res.statusCode == 200) {
+      if (res.statusCode == 200) {
         var data = json.decode(res.body);
         if (data == null) {
-          
-          bidonCliente.setBool('comproBidon', false);
-          
+          setState(() {
+            bidonCliente.setBool('comproBidon', false);
+          });
         } else {
-          bidonCliente.setBool('comproBidon', true);
+          setState(() {
+            bidonCliente.setBool('comproBidon', true);
+          });
         }
       }
     } catch (e) {
@@ -178,12 +180,11 @@ class _LoginState extends State<Login> {
   }
 
   Future<dynamic> recargas(clienteID) async {
-   
     try {
-       var res = await http.get(
-      Uri.parse(apiUrl + '/api/cliente/recargas/' + clienteID.toString()),
-      headers: {"Content-type": "application/json"},
-    );
+      var res = await http.get(
+        Uri.parse(apiUrl + '/api/cliente/recargas/' + clienteID.toString()),
+        headers: {"Content-type": "application/json"},
+      );
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
         if (data != null) {

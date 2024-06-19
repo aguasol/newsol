@@ -396,7 +396,9 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     SharedPreferences yasemostroPubli = await SharedPreferences.getInstance();
     // BIDON COMPRADO ?
     SharedPreferences bidonCliente = await SharedPreferences.getInstance();
-    yaComproBidon = bidonCliente.getBool('comproBidon');
+    setState(() {
+      yaComproBidon = bidonCliente.getBool('comproBidon');
+    });
 
     if (yasemostroPubli.getBool("ya") != null) {
       setState(() {
@@ -415,12 +417,28 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     await getProducts();
     await getZonas();
     await getPromociones();
-    if (widget.esNuevo != null && widget.esNuevo == true && yaSeMostro == false && yaComproBidon == false) {
-      print(".....ENTRANDO Y LLAMANDO");
+    print("..widget nuevo");
+    print(widget.esNuevo);
+    print("...YASEMOSTRO");
+    print(yaSeMostro);
+    print("ya compro");
+    print(yaComproBidon);
+    if (widget.esNuevo == true && yaComproBidon == false) {
+      print("//////////");
+      print(".....ENTRANDO Y LLAMANDO.........");
+      print("...todavia");
       await muestraDialogoPubli(context);
-    } else {
-      print("+++++++++++++++++++++++++++++++++++++++++");
-      print(widget.esNuevo);
+
+    } else if (widget.esNuevo == false && yaComproBidon == false) {
+      
+      print("...todavia");
+      await muestraDialogoPubli(context);
+
+    } else if (widget.esNuevo == false && yaComproBidon == true){
+      SharedPreferences bidonCliente = await SharedPreferences.getInstance();
+      bidonCliente.remove('comproBidon');
+      bidonCliente.setBool('comproBidon', true);
+      print("...ya compre");
     }
   }
 
