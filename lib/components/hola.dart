@@ -1901,7 +1901,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                                           )
                                                                         ],
                                                                         subject:
-                                                                            'Usa mi codigo: $codigo',
+                                                                            '💵💵 Usa mi codigo: $codigo',
                                                                       );
                                                                     },
                                                                     child: Row(

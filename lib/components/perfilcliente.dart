@@ -192,47 +192,48 @@ class _PerfilCliente extends State<PerfilCliente> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            barrierColor: Colors.grey.withOpacity(0.41),
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: Container(
-                                  child: Text("texto"),
-                                ),
-                              );
-                            });
-                      },
-                      child: Card(
-                          margin: EdgeInsets.only(right: anchoActual * 0.09),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          surfaceTintColor: Colors.white,
-                          color: Colors.white,
-                          elevation: 8,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      surfaceTintColor: Colors.white,
+                      color: Colors.white,
+                      elevation: 8,
+                      child: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                barrierColor: Colors.grey.withOpacity(0.41),
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    child: Container(
+                                      child: Text("texto"),
+                                    ),
+                                  );
+                                });
+                          },
                           child: Row(
                             children: [
                               Container(
+                                  //color: Colors.amber,
                                   padding:
-                                      EdgeInsets.only(left: anchoActual * 0.07),
+                                      EdgeInsets.only(left: anchoActual * 0.04),
                                   child: RichText(
                                       text: TextSpan(children: [
                                     TextSpan(
                                       text: "${userProvider.user?.recargas}",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: largoActual * 0.06,
-                                          color: colorTitulos,
-                                          height: 0.28),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: largoActual * 0.06,
+                                        color: colorTitulos,
+                                      ),
                                     ),
                                     TextSpan(
                                       text: "\nrecargas",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: largoActual * 0.016,
-                                          color: colorTitulos),
+                                          color: colorTitulos,
+                                          height: 0.2),
                                     ),
                                     TextSpan(
                                       text: "\no oportunidades",
@@ -243,24 +244,15 @@ class _PerfilCliente extends State<PerfilCliente> {
                                     )
                                   ]))),
                               Container(
-                                height:
-                                    MediaQuery.of(context).size.height / 5.8,
-                                width: MediaQuery.of(context).size.width / 6,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "lib/imagenes/BIDON20.png"),
-                                        fit: BoxFit.fill)),
+                                height: largoActual * 0.12,
+                                width: anchoActual * 0.31,
+                                //color: Colors.grey,
+                                child: Lottie.asset(
+                                  'lib/imagenes/Animation - 1718738830493.json',
+                                ),
                               ),
                             ],
-                          ) /*Container(
-                            //color: Colors.grey,
-                            child: Column(
-                              children: [
-                              ],
-                            ),
-                          )*/
-                          ),
+                          )),
                     ),
                   ),
 
