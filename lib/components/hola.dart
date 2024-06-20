@@ -107,7 +107,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
   ScrollController scrollController2 = ScrollController();
 
   // Define un controlador global
-  FixedExtentScrollController _scrollController = FixedExtentScrollController();
+  final FixedExtentScrollController _scrollController =
+      FixedExtentScrollController();
   Timer? _timer;
   DateTime fechaLimite = DateTime.now();
 
@@ -124,6 +125,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     super.dispose();
     scrollController1.dispose();
     scrollController2.dispose();
+    _scrollController.dispose();
     _timer?.cancel();
   }
 
@@ -186,8 +188,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                       Positioned(
                                           top: MediaQuery.of(context)
                                                   .size
-                                                  .width /
-                                              1.75,
+                                                  .height /
+                                              2.6,
                                           left: MediaQuery.of(context)
                                                   .size
                                                   .width /
@@ -196,24 +198,25 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                             "${codigo}",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                                color: Colors.amber),
+                                                fontSize: 22,
+                                                color: const Color.fromARGB(255, 255, 7, 139)),
                                           )),
                                       Positioned(
                                           top: MediaQuery.of(context)
                                                   .size
-                                                  .width /
-                                              3,
+                                                  .height /
+                                              2,
                                           left: MediaQuery.of(context)
                                                   .size
                                                   .width /
                                               3.85,
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.blue),
+                                            width: 80,
+                                            height: 80,
                                             child: ElevatedButton(
+                                                style:ButtonStyle(
+                                                  backgroundColor: MaterialStateProperty.all(Colors.transparent)
+                                                ),
                                                 onPressed: () {
                                                   // Hacer scroll al siguiente elemento
                                                   final currentPosition =
@@ -231,7 +234,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                     curve: Curves.easeInOut,
                                                   );
                                                 },
-                                                child: Text("->")),
+                                                child: Text("")),
                                           ))
 
                                       //child: Image(image: AssetImage('lib/imagenes/codigo_entra.jpg')))
@@ -403,10 +406,11 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     SharedPreferences yasemostroPubli = await SharedPreferences.getInstance();
     // BIDON COMPRADO ?
     SharedPreferences bidonCliente = await SharedPreferences.getInstance();
+    print("prefrencias-----------");
     setState(() {
       yaComproBidon = bidonCliente.getBool('comproBidon');
     });
-
+    print(yaComproBidon);
     if (yasemostroPubli.getBool("ya") != null) {
       setState(() {
         yaSeMostro = yasemostroPubli.getBool("ya");
@@ -417,6 +421,42 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
       });
     }
   }
+  
+  Future<dynamic> getBidonCliente(clienteID) async {
+    try {
+      var res = await http.get(
+        Uri.parse(apiUrl + '/api/clientebidones/' + clienteID.toString()),
+        headers: {"Content-type": "application/json"},
+      );
+      SharedPreferences bidonCliente = await SharedPreferences.getInstance();
+
+      if (res.statusCode == 200) {
+        var data = json.decode(res.body);
+        print("data si hay bidon o no");
+        print(data);
+        bool compre = false;
+        if(data==null){
+          print("no hay data");
+          print("no compre");
+          setState(() {
+            compre = false;
+          });
+          return compre;
+        }
+        else{
+          print("compre");
+          setState(() {
+            compre = true;
+          });
+          return compre;
+          //print("no hay dta");
+        }
+      }
+    } catch (e) {
+      throw Exception("Error ${e}");
+    }
+  }
+ 
 
   Future<void> ordenarFuncionesInit() async {
     await _cargarPreferencias();
@@ -424,28 +464,43 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     await getProducts();
     await getZonas();
     await getPromociones();
+    // TRAEMOS EL ID DEL USUARIO
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    bool compreBidon = await getBidonCliente(userProvider.user?.id);
+    print("numerito ${compreBidon}");
+
+
     print("..widget nuevo");
     print(widget.esNuevo);
     print("...YASEMOSTRO");
     print(yaSeMostro);
     print("ya compro");
-    print(yaComproBidon);
-    if (widget.esNuevo == true && yaComproBidon == false) {
-      print("//////////");
+    print(compreBidon);
+
+    if (widget.esNuevo == true && compreBidon == false) {
       print(".....ENTRANDO Y LLAMANDO.........");
       print("...todavia");
+   
       await muestraDialogoPubli(context);
 
-    } else if (widget.esNuevo == false && yaComproBidon == false) {
-      
+    } else if (widget.esNuevo == false && compreBidon == false) {
       print("...todavia");
-      await muestraDialogoPubli(context);
+    
 
-    } else if (widget.esNuevo == false && yaComproBidon == true){
-      SharedPreferences bidonCliente = await SharedPreferences.getInstance();
-      bidonCliente.remove('comproBidon');
-      bidonCliente.setBool('comproBidon', true);
-      print("...ya compre");
+      await muestraDialogoPubli(context);
+    } else if (widget.esNuevo == false && compreBidon == true) {
+    
+      print("ya compre");
+     
+    }
+    if (compreBidon == true) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      setState(() {
+        userProvider.user?.esNuevo = false;
+      });
+      print("-----PROVIDER USER");
+      print(userProvider.user?.esNuevo);
     }
   }
 

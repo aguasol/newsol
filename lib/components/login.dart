@@ -69,11 +69,15 @@ class _LoginState extends State<Login> {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
+        print("data si hay bidon o no");
+        print(data);
         if (data == null) {
+          print("no hay dta");
           setState(() {
             bidonCliente.setBool('comproBidon', false);
           });
         } else {
+          print("si hay data");
           setState(() {
             bidonCliente.setBool('comproBidon', true);
           });
@@ -248,7 +252,7 @@ class _LoginState extends State<Login> {
           // data['usuario']['nombre']
           print(data['usuario']['id']);
           await recargas(data['usuario']['id']);
-          await getBidonCliente(data['usuario']['id']);
+         // await getBidonCliente(data['usuario']['id']);
           userData = UserModel(
               id: data['usuario']['id'],
               nombre: data['usuario']['nombre'],

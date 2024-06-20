@@ -203,7 +203,9 @@ class _PedidoState extends State<Pedido> {
         for (var i = 0; i < seleccionadosProvider.length; i++) {
           //si hay un bidon nuevo en los productos de la lista, solo productos
           //no promociones
-          if (seleccionadosProvider[i].id == 2) {
+
+          // CUIDADO CON EL ID :1 ES PARA BIDON Y 2 ES PARA RECARGA ...
+          if (seleccionadosProvider[i].id == 1) {
             setState(() {
               hayBidon = true;
               cantidadBidones = seleccionadosProvider[i].cantidad;

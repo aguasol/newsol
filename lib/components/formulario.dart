@@ -9,7 +9,6 @@ import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-
 class Formu extends StatefulWidget {
   const Formu({super.key});
 
@@ -78,7 +77,6 @@ class _FormuState extends State<Formu> {
             "banco_retiro": "NA",
             "numero_cuenta": "NA"
           }));
-      
     } catch (e) {
       throw Exception('$e');
     }
@@ -521,8 +519,10 @@ class _FormuState extends State<Formu> {
                                 _email.text,
                                 _telefono.text,
                                 _ruc.text);
-                                // USUARIO NUEVO PARA CONTROL DE BIDON
-                                userProvider.user?.esNuevo = true;
+                            // USUARIO NUEVO PARA CONTROL DE BIDON
+                           /* setState(() {
+                              userProvider.user?.esNuevo = true;
+                            });*/
 
                             Navigator.push(
                               context,
