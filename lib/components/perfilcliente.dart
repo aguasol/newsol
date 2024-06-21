@@ -206,9 +206,8 @@ class _PerfilCliente extends State<PerfilCliente> {
                                 builder: (context) {
                                   return Dialog(
                                     child: Container(
-                                      padding: EdgeInsets.all(9),
-                                      width: 200,
-                                      height: 350,
+                                      width: 150,
+                                      height: 230,
                                       child: Image.network('$apiUrl/images/sorteo.jpg'),
                                     ),
                                   );
@@ -872,7 +871,6 @@ class _PerfilCliente extends State<PerfilCliente> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.remove('user');
-                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const Login()),

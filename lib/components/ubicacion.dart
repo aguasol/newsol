@@ -549,12 +549,13 @@ class _UbicacionState extends State<Ubicacion> {
                                 builder: (BuildContext context) {
                                   return const AlertDialog(
                                     content: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         CircularProgressIndicator(
-                                          backgroundColor: Color.fromARGB(255, 19, 65, 78),
+                                          backgroundColor: Color.fromARGB(255, 118, 213, 80),
                                         ),
-                                        Text("Cargando ...")
+                                        SizedBox(width: 20,),
+                                        Text("Cargando ...",style: TextStyle(fontSize: 15),)
                                        
                                       ],
                                     ),
@@ -565,7 +566,7 @@ class _UbicacionState extends State<Ubicacion> {
                                 await currentLocation();
                               }
                               catch(e){
-
+                                throw Exception('Error $e');
                               }
                               
                             },
