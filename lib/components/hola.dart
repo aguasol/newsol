@@ -199,7 +199,8 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 22,
-                                                color: const Color.fromARGB(255, 255, 7, 139)),
+                                                color: const Color.fromARGB(
+                                                    255, 255, 7, 139)),
                                           )),
                                       Positioned(
                                           top: MediaQuery.of(context)
@@ -214,9 +215,11 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                             width: 80,
                                             height: 80,
                                             child: ElevatedButton(
-                                                style:ButtonStyle(
-                                                  backgroundColor: MaterialStateProperty.all(Colors.transparent)
-                                                ),
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors
+                                                                .transparent)),
                                                 onPressed: () {
                                                   // Hacer scroll al siguiente elemento
                                                   final currentPosition =
@@ -261,62 +264,110 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                               image: AssetImage(
                                                   'lib/imagenes/IMG-20240618-WA0002.jpg'))),
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text("Vista de 1ER BIDÓN"),
+                                    Positioned(
+                                        top:
+                                            MediaQuery.of(context).size.height /
+                                                2.10,
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                5.5,
+                                        child: Container(
+                                          width: 150,
+                                          height: 60,
+                                          child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.transparent)),
+                                              onPressed: () {
+                                                final pedidoProvider =
+                                                    Provider.of<PedidoProvider>(
+                                                        context,
+                                                        listen: false);
+                                                print(
+                                                    "BIDON PRODUCT------------");
+                                                print(bidonProducto[0].id);
+                                                print("cantidad");
+                                                print(
+                                                    bidonProducto[0].cantidad);
+                                                print(bidonProducto[0].nombre);
+                                                print(bidonProducto[0].precio);
+                                                print(bidonProducto[0].promoID);
+                                                print(bidonProducto[0]
+                                                    .cantidadRequeridaParaRuta);
+                                                bidonProducto[0].cantidad = 1;
+
+                                                PedidoModel newPedido =
+                                                    PedidoModel(
+                                                        seleccionados:
+                                                            bidonProducto,
+                                                        seleccionadosPromo: [],
+                                                        cantidadProd:
+                                                            bidonProducto[0]
+                                                                .cantidad,
+                                                        totalProds:
+                                                            bidonProducto[0]
+                                                                    .precio *
+                                                                bidonProducto[0]
+                                                                    .cantidad,
+                                                        envio: 0);
+
+                                                // SE ENVIA EL PROVIDER ACTUAL
+                                                pedidoProvider
+                                                    .updatePedido(newPedido);
+
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const Pedido()
+                                                      //const Promos()
+                                                      ),
+                                                );
+                                              },
+                                              child: Text("")),
+                                        )
                                         /////////////////
-                                        ElevatedButton(
+
+                                        ),
+                                  Positioned(
+                                        top:
+                                            MediaQuery.of(context).size.height /
+                                                1.85,
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                5.5,
+                                        child: Container(
+                                          width: 150,
+                                          height: 60,
+                                          child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.transparent)),
                                             onPressed: () {
-                                              final pedidoProvider =
-                                                  Provider.of<PedidoProvider>(
-                                                      context,
-                                                      listen: false);
-                                              print(
-                                                  "BIDON PRODUCT------------");
-                                              print(bidonProducto[0].id);
-                                              print("cantidad");
-                                              print(bidonProducto[0].cantidad);
-                                              print(bidonProducto[0].nombre);
-                                              print(bidonProducto[0].precio);
-                                              print(bidonProducto[0].promoID);
-                                              print(bidonProducto[0]
-                                                  .cantidadRequeridaParaRuta);
-                                              bidonProducto[0].cantidad = 1;
-
-                                              PedidoModel newPedido =
-                                                  PedidoModel(
-                                                      seleccionados:
-                                                          bidonProducto,
-                                                      seleccionadosPromo: [],
-                                                      cantidadProd:
-                                                          bidonProducto[0]
-                                                              .cantidad,
-                                                      totalProds:
-                                                          bidonProducto[0]
-                                                                  .precio *
-                                                              bidonProducto[0]
-                                                                  .cantidad,
-                                                      envio: 0);
-
-                                              // SE ENVIA EL PROVIDER ACTUAL
-                                              pedidoProvider
-                                                  .updatePedido(newPedido);
-
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const Pedido()
-                                                    //const Promos()
-                                                    ),
-                                              );
-                                            },
-                                            child: Text("Llevalo ya!"))
+                                                  // Hacer scroll al siguiente elemento
+                                                  final currentPosition =
+                                                      _scrollController.offset;
+                                                  final itemExtent =
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          3;
+                                                  _scrollController.animateTo(
+                                                    currentPosition +
+                                                        itemExtent,
+                                                    duration:
+                                                        Duration(seconds: 1),
+                                                    curve: Curves.easeInOut,
+                                                  );
+                                                },
+                                              
+                                              child: Text("")),
+                                        )
                                         /////////////////
-                                      ],
-                                    ),
+
+                                        ),
                                   ],
                                 ),
                               ),
@@ -340,55 +391,85 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                             image: AssetImage(
                                                 'lib/imagenes/IMG-20240618-WA0004.jpg'))),
                                   ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("Vista de  BIDÓN + CÓDIGO"),
+                                  Positioned(
+                                    top:
+                                            MediaQuery.of(context).size.height /
+                                                2.15,
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                2.9,
+                                    child: 
+                                      
                                       /////////////////
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            final pedidoProvider =
-                                                Provider.of<PedidoProvider>(
-                                                    context,
-                                                    listen: false);
-                                            print("BIDON PRODUCT------------");
-                                            print(bidonProducto[0].id);
-                                            print("cantidad");
-                                            print(bidonProducto[0].cantidad);
-                                            print(bidonProducto[0].nombre);
-                                            print(bidonProducto[0].precio);
-                                            print(bidonProducto[0].promoID);
-                                            print(bidonProducto[0]
-                                                .cantidadRequeridaParaRuta);
-                                            bidonProducto[0].cantidad = 1;
-
-                                            PedidoModel newPedido = PedidoModel(
-                                                seleccionados: bidonProducto,
-                                                seleccionadosPromo: [],
-                                                cantidadProd:
-                                                    bidonProducto[0].cantidad,
-                                                totalProds: bidonProducto[0]
-                                                        .precio *
-                                                    bidonProducto[0].cantidad,
-                                                envio: 0);
-
-                                            // SE ENVIA EL PROVIDER ACTUAL
-                                            pedidoProvider
-                                                .updatePedido(newPedido);
-
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Pedido()
-                                                  //const Promos()
-                                                  ),
-                                            );
-                                          },
-                                          child: Text("Llevalo ya!"))
+                                      Container(
+                                        height: 60,
+                                        width: 150,
+                                        child: ElevatedButton(
+                                          style:ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(Colors.transparent)
+                                          ),
+                                          
+                                            onPressed: () {
+                                              final pedidoProvider =
+                                                  Provider.of<PedidoProvider>(
+                                                      context,
+                                                      listen: false);
+                                              print("BIDON PRODUCT------------");
+                                              print(bidonProducto[0].id);
+                                              print("cantidad");
+                                              print(bidonProducto[0].cantidad);
+                                              print(bidonProducto[0].nombre);
+                                              print(bidonProducto[0].precio);
+                                              print(bidonProducto[0].promoID);
+                                              print(bidonProducto[0]
+                                                  .cantidadRequeridaParaRuta);
+                                              bidonProducto[0].cantidad = 1;
+                                        
+                                              PedidoModel newPedido = PedidoModel(
+                                                  seleccionados: bidonProducto,
+                                                  seleccionadosPromo: [],
+                                                  cantidadProd:
+                                                      bidonProducto[0].cantidad,
+                                                  totalProds: bidonProducto[0]
+                                                          .precio *
+                                                      bidonProducto[0].cantidad,
+                                                  envio: 0);
+                                        
+                                              // SE ENVIA EL PROVIDER ACTUAL
+                                              pedidoProvider
+                                                  .updatePedido(newPedido);
+                                        
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Pedido()
+                                                    //const Promos()
+                                                    ),
+                                              );
+                                            },
+                                            child: Text("")),
+                                      )
                                       /////////////////
-                                    ],
+                                    
                                   ),
+                                  Positioned(
+                                    top:MediaQuery.of(context).size.height/1.88,
+                                    left:MediaQuery.of(context).size.width/3,
+                                    child:Container(
+                                      width: 150,
+                                      height: 55,
+                                      child: ElevatedButton(
+                                        style:ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all(Colors.transparent)
+                                        ),
+                                        onPressed: (){
+                                          Navigator.of(context).pop();
+                                        },
+                                        child:Text("")
+                                      ),
+                                    )
+                                  )
                                 ]),
                               ),
                             ),
@@ -421,7 +502,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
       });
     }
   }
-  
+
   Future<dynamic> getBidonCliente(clienteID) async {
     try {
       var res = await http.get(
@@ -435,15 +516,14 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
         print("data si hay bidon o no");
         print(data);
         bool compre = false;
-        if(data==null){
+        if (data == null) {
           print("no hay data");
           print("no compre");
           setState(() {
             compre = false;
           });
           return compre;
-        }
-        else{
+        } else {
           print("compre");
           setState(() {
             compre = true;
@@ -456,7 +536,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
       throw Exception("Error ${e}");
     }
   }
- 
 
   Future<void> ordenarFuncionesInit() async {
     await _cargarPreferencias();
@@ -470,7 +549,6 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     bool compreBidon = await getBidonCliente(userProvider.user?.id);
     print("numerito ${compreBidon}");
 
-
     print("..widget nuevo");
     print(widget.esNuevo);
     print("...YASEMOSTRO");
@@ -481,18 +559,14 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     if (widget.esNuevo == true && compreBidon == false) {
       print(".....ENTRANDO Y LLAMANDO.........");
       print("...todavia");
-   
-      await muestraDialogoPubli(context);
 
+      await muestraDialogoPubli(context);
     } else if (widget.esNuevo == false && compreBidon == false) {
       print("...todavia");
-    
 
       await muestraDialogoPubli(context);
     } else if (widget.esNuevo == false && compreBidon == true) {
-    
       print("ya compre");
-     
     }
     if (compreBidon == true) {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
