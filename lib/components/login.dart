@@ -433,13 +433,15 @@ class _LoginState extends State<Login> {
                   // LOGO SOL
                   Center(
                     child: Container(
-                      margin: const EdgeInsets.only(top: 30, left: 20),
-                      height: MediaQuery.of(context).size.height / 8,
+                      //margin: const EdgeInsets.only(top: 30, left: 20),
+                      height: MediaQuery.of(context).size.height / 5,
                       width: MediaQuery.of(context).size.width / 2.25,
-                      child: Opacity(
-                          opacity: 1,
-                          child: Image.asset(
-                              'lib/imagenes/logo_aguasol_blanco.png')),
+                      decoration: BoxDecoration(
+                        image:DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage('lib/imagenes/solmarket.png')),
+                        borderRadius: BorderRadius.circular(20)
+                      ),
                     ),
                   ),
                   SizedBox(
