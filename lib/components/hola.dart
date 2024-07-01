@@ -519,15 +519,19 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
         if (data == null) {
           print("no hay data");
           print("no compre");
+           if (mounted) {
           setState(() {
             compre = false;
           });
+        }
           return compre;
         } else {
           print("compre");
+          if (mounted) {
           setState(() {
             compre = true;
           });
+        }
           return compre;
           //print("no hay dta");
         }
@@ -544,6 +548,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     await getZonas();
     await getPromociones();
     // TRAEMOS EL ID DEL USUARIO
+    if (!mounted) return;
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     bool compreBidon = await getBidonCliente(userProvider.user?.id);
@@ -555,7 +560,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     print(yaSeMostro);
     print("ya compro");
     print(compreBidon);
-
+if (!mounted) return;
     if (widget.esNuevo == true && compreBidon == false) {
       print(".....ENTRANDO Y LLAMANDO.........");
       print("...todavia");
@@ -569,6 +574,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
       print("ya compre");
     }
     if (compreBidon == true) {
+      if (!mounted) return;
       final userProvider = Provider.of<UserProvider>(context, listen: false);
       setState(() {
         userProvider.user?.esNuevo = false;
