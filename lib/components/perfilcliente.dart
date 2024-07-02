@@ -40,20 +40,20 @@ class _PerfilCliente extends State<PerfilCliente> {
   String numrecargas = '';
   DateTime mesyAnio(String? fecha) {
     if (fecha is String) {
-      print('es string');
+      //print('es string');
       return DateTime.parse(fecha);
     } else {
-      print('no es string');
+      //print('no es string');
       return DateTime.now();
     }
   }
 
   Future<dynamic> updateCliente(saldoBeneficios, suscripcion, frecuencia,
       quiereretirar, clienteID, medioretiro, bancoretiro, numerocuenta) async {
-    print("cliente----------------------------------------------");
+    /*print("cliente----------------------------------------------");
     print(clienteID);
     print("ruta------------------------------------------------");
-    print(apiUrl + apiCliente + clienteID.toString());
+    print(apiUrl + apiCliente + clienteID.toString());*/
     await http.put(Uri.parse(apiUrl + apiCliente + clienteID.toString()),
         headers: {"Content-type": "application/json"},
         body: jsonEncode({
@@ -65,7 +65,7 @@ class _PerfilCliente extends State<PerfilCliente> {
           "banco_retiro": bancoretiro,
           "numero_cuenta": numerocuenta
         }));
-    print("RUTA ACTUALIZADA A ");
+   // print("RUTA ACTUALIZADA A ");
   }
 
   void actualizarProviderCliente(
@@ -432,8 +432,8 @@ class _PerfilCliente extends State<PerfilCliente> {
                                                                   setState(() {
                                                                     _selectedItem =
                                                                         newValue!;
-                                                                    print(
-                                                                        'valor: $_selectedItem');
+                                                                    /*print(
+                                                                        'valor: $_selectedItem');*/
                                                                   });
                                                                 },
                                                                 value:

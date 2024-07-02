@@ -63,7 +63,7 @@ class _AsistenciaState extends State<Asistencia> {
                                   if (await canLaunchUrl(url)) {
                                     await launchUrl(url);
                                   } else {
-                                    print('no se puede llamar');
+                                   // print('no se puede llamar');
                                   }
                                 },
                                 child: Text(

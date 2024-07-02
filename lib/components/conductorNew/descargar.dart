@@ -59,7 +59,7 @@ class _PdfState extends State<Pdf> {
 
     final dir = await getExternalStorageDirectory();
     final file = File('${dir!.path}/$name');
-    print("----${dir.path}");
+    //print("----${dir.path}");
 
     await file.writeAsBytes(bytes);
 
@@ -106,8 +106,8 @@ class _PdfState extends State<Pdf> {
         await rootBundle.load('lib/imagenes/logo_sol_tiny.png');
     Uint8List logoData = (logoEmpresa).buffer.asUint8List();
     List<Uint8List> fotos = [];
-    print("-----------------------------------------------");
-    print(widget.idpedidos);
+    //print("-----------------------------------------------");
+    //print(widget.idpedidos);
     for (var pedido in widget.idpedidos!) {
       final pass = await getApplicationDocumentsDirectory();
       final otro = path.join(pass.path, 'pictures/$pedido.jpg');
@@ -117,11 +117,11 @@ class _PdfState extends State<Pdf> {
         Uint8List finalByte = (byteData).buffer.asUint8List();
         fotos.add(finalByte);
       } else {
-        print("El archivo no existe.");
+        //print("El archivo no existe.");
         fotos.add(logoData);
       }
     }
-    print(".......dentro d create");
+    //print(".......dentro d create");
     final pdf = pw.Document();
 
     // SECCION 1

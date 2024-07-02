@@ -67,7 +67,7 @@ class _ProductosState extends State<Productos> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
@@ -130,7 +130,7 @@ class _ProductosState extends State<Productos> {
 
   void esVacio(PedidoModel? pedido) {
     if (pedido is PedidoModel) {
-      print('ES PEDIDOOO');
+      //print('ES PEDIDOOO');
       productosProvider = pedido.seleccionados;
       promosProvider = pedido.seleccionadosPromo;
       cantCarrito = productosProvider.length + promosProvider.length;
@@ -145,7 +145,7 @@ class _ProductosState extends State<Productos> {
         });
       }
     } else {
-      print('no es pedido');
+      //print('no es pedido');
       setState(() {
         cantCarrito = 0;
         productosProvider = [];

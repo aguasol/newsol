@@ -86,10 +86,10 @@ class _PedidoState extends State<Pedido> {
 
   DateTime mesyAnio(String? fecha) {
     if (fecha is String) {
-      print('es string');
+      //print('es string');
       return DateTime.parse(fecha);
     } else {
-      print('no es string');
+      //print('no es string');
       return DateTime.now();
     }
   }
@@ -106,7 +106,7 @@ class _PedidoState extends State<Pedido> {
       notas,
       codigo,
       ubicacionID) async {
-    print("-----------------------creandoPEDIDOO");
+    //print("-----------------------creandoPEDIDOO");
     await http.post(Uri.parse(apiUrl + apiPedido),
         headers: {"Content-type": "application/json"},
         body: jsonEncode({
@@ -161,12 +161,12 @@ class _PedidoState extends State<Pedido> {
         notas,
         codigo,
         ubicacionSelectID);
-    print(tiempoGMTPeru.toString());
+    /*print(tiempoGMTPeru.toString());
     print(tiempoActual.timeZoneName);
     print("-----------------------------------");
     print("creando detalles de pedidos----------");
     print("-----------------------------------");
-    print("longitud de seleccinados--------${seleccionadosTodos.length}");
+    print("longitud de seleccinados--------${seleccionadosTodos.length}");*/
     for (var i = 0; i < seleccionadosTodos.length; i++) {
       if (seleccionadosTodos[i] is Promo) {
         for (Producto producto in seleccionadosTodos[i].listaProductos) {
@@ -187,7 +187,7 @@ class _PedidoState extends State<Pedido> {
 
   void esVacio(PedidoModel? pedido) {
     if (pedido is PedidoModel) {
-      print('ES PEDIDOOO');
+      //print('ES PEDIDOOO');
       setState(() {
         totalProvider = pedido.totalProds;
         seleccionadosProvider = pedido.seleccionados;
@@ -229,7 +229,7 @@ class _PedidoState extends State<Pedido> {
         }
       });
     } else {
-      print('no es pedido');
+      //print('no es pedido');
       almenosuno = false;
       limpiarVariables();
     }
@@ -238,7 +238,7 @@ class _PedidoState extends State<Pedido> {
   void esUbicacion(
       UbicacionModel? ubicacion, UbicacionListaModel? ubicacionList) {
     if (ubicacion is UbicacionModel) {
-      print('ES UBIIIII');
+      //print('ES UBIIIII');
       setState(() {
         hayUbicacion = true;
         miUbicacion = ubicacion;
@@ -248,7 +248,7 @@ class _PedidoState extends State<Pedido> {
       });
     } else {
       if (ubicacionList is UbicacionListaModel) {
-        print('no es ubi');
+       // print('no es ubi');
         setState(() {
           direccion = "Seleccione una dirección, por favor";
           ubicacionesString = ubicacionList.listaUbisString;
@@ -259,7 +259,7 @@ class _PedidoState extends State<Pedido> {
   }
 
   Future<dynamic> cuponExist(cupon) async {
-    print('----------------------entro a cupon Exists');
+    //print('----------------------entro a cupon Exists');
     var res = await http.post(Uri.parse(apiUrl + codigoverify),
         headers: {"Content-type": "application/json"},
         body: jsonEncode({"codigo": cupon}));
@@ -270,8 +270,8 @@ class _PedidoState extends State<Pedido> {
           beneficiadoID = data['id'];
           existe = data['existe'];
           fechaLimiteString = data['fecha_creacion_cuenta'];
-          print('CORRIO EL COSO');
-          print("++++++++++++++ ESTE ES EL EXISTE $existe");
+          /*print('CORRIO EL COSO');
+          print("++++++++++++++ ESTE ES EL EXISTE $existe");*/
         });
       }
     } catch (e) {
@@ -320,12 +320,12 @@ class _PedidoState extends State<Pedido> {
       obtenerTotal();
 
       actualizarProviderPedido();
-      print("nUEVO TOTAL PROVIDER ${totalProvider}0");
+      //print("nUEVO TOTAL PROVIDER ${totalProvider}0");
     });
 
-    print("esta es la listA PROMOCIONES");
+    /*print("esta es la listA PROMOCIONES");
     print(seleccionadosTodos[index].cantidad);
-    print("esta es la PROMOCIONES CONTABILIZADAS");
+    print("esta es la PROMOCIONES CONTABILIZADAS");*/
   }
 
   void disminuir(int index) {
@@ -335,12 +335,12 @@ class _PedidoState extends State<Pedido> {
         obtenerTotal();
 
         actualizarProviderPedido();
-        print("nUEVO TOTAL PROVIDER ${totalProvider}0");
+        //print("nUEVO TOTAL PROVIDER ${totalProvider}0");
       });
     }
     //almenosUno =
     //  listPromociones.where((promo) => promo.cantidad > 0).isNotEmpty;
-    print(seleccionadosTodos[index].cantidad);
+    //print(seleccionadosTodos[index].cantidad);
   }
 
   void descuentoPrimeraCompra(bool? esnuevo) {
@@ -418,8 +418,8 @@ class _PedidoState extends State<Pedido> {
     });
     esVacio(pedidoProvider.pedido);
     descuentoPrimeraCompra(userProvider.user?.esNuevo);
-    print("SELECCIONADOS TODOS");
-    print(seleccionadosTodos);
+    /*print("SELECCIONADOS TODOS");
+    print(seleccionadosTodos);*/
     if (almenosuno) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -741,8 +741,8 @@ class _PedidoState extends State<Pedido> {
                                                   setState(() {
                                                     incrementar(index);
 
-                                                    print(
-                                                        "incrementar ${seleccionadosTodos[index].cantidad}");
+                                                    /*print(
+                                                        "incrementar ${seleccionadosTodos[index].cantidad}");*/
                                                   });
                                                 },
                                                 iconSize: largoActual * 0.028,
@@ -760,8 +760,8 @@ class _PedidoState extends State<Pedido> {
                                               child: IconButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    print("eliminandinnnnn");
-                                                    print(index);
+                                                    /*print("eliminandinnnnn");
+                                                    print(index);*/
                                                     var variableEliminar =
                                                         seleccionadosTodos[
                                                             index];
@@ -796,7 +796,7 @@ class _PedidoState extends State<Pedido> {
                                                     });
                                                   }
 
-                                                  print(seleccionadosTodos);
+                                                  //print(seleccionadosTodos);
                                                 },
                                                 iconSize: largoActual * 0.027,
                                                 icon: const Icon(
@@ -919,10 +919,10 @@ class _PedidoState extends State<Pedido> {
                                   //si no es mi codigfo
                                   await cuponExist(_cupon.text);
 
-                                  print(fechaLimite);
+                                  //print(fechaLimite);
                                   if (existe) {
                                     //EXISTE EL CODIGO
-                                    print("codigo válido");
+                                   // print("codigo válido");
                                     setState(() {
                                       fechaLimite = mesyAnio(fechaLimiteString)
                                           .add(const Duration(days: (30 * 3)));
@@ -935,7 +935,7 @@ class _PedidoState extends State<Pedido> {
                                       setState(() {
                                         _cupon.clear();
                                       });
-                                      print("el codigo ya expiro");
+                                      //print("el codigo ya expiro");
                                       // ignore: use_build_context_synchronously
                                       showDialog(
                                           // ignore: use_build_context_synchronously
@@ -959,21 +959,21 @@ class _PedidoState extends State<Pedido> {
                                             );
                                           });
                                     } else {
-                                      print('el codigo esta vigentee');
+                                     // print('el codigo esta vigentee');
                                       if (hayBidon) {
                                         //SI HAY BIDONES NUEVOS EN LA LISTA DE PRODUCTOS
-                                        print('hay bidones nuevos');
+                                        //print('hay bidones nuevos');
                                         setState(() {
                                           buscandoCodigo = false;
                                           colorCupon = const Color.fromRGBO(
                                               255, 0, 93, 1.000);
                                           ahorro = 12.0 * cantidadBidones;
 
-                                          print("ESTE ES EL AHORRO: $ahorro");
+                                         // print("ESTE ES EL AHORRO: $ahorro");
                                           actualizarProviderPedido();
                                         });
                                       } else {
-                                        print('no hay bidones');
+                                        //print('no hay bidones');
                                         setState(() {
                                           _cupon.clear();
                                           buscandoCodigo = false;
@@ -1008,7 +1008,7 @@ class _PedidoState extends State<Pedido> {
                                   } else {
                                     //PONER UNA SEÑAL DE
                                     //QUE EL CODIGO NO EXISTE
-                                    print("no existe el codigo");
+                                    //print("no existe el codigo");
                                     setState(() {
                                       _cupon.clear();
                                       buscandoCodigo = false;
@@ -1139,8 +1139,8 @@ class _PedidoState extends State<Pedido> {
                                   light0 = value;
                                   tiempoPeru = tiempoActual
                                       .subtract(const Duration(hours: 0));
-                                  print(value);
-                                  print('hora acrtual ${tiempoPeru.hour}');
+                                 /* print(value);
+                                  print('hora acrtual ${tiempoPeru.hour}');*/
                                 });
                                 if (light0 == false) {
                                   //ES NORMAL
@@ -1148,25 +1148,25 @@ class _PedidoState extends State<Pedido> {
                                     color = Colors.white;
                                     tipoPedido = 'normal';
                                     envio = 0;
-                                    print(tipoPedido);
-                                    print(envio);
+                                    /*print(tipoPedido);
+                                    print(envio);*/
                                     actualizarProviderPedido();
                                   });
                                 } else {
                                   //ES EXPRESS
                                   if (tiempoPeru.hour <= 16) {
-                                    print('son menos de las 16');
+                                    //print('son menos de las 16');
                                     setState(() {
                                       tipoPedido = 'express';
                                       color = const Color.fromRGBO(
                                           120, 251, 99, 1.000);
                                       envio = 4;
-                                      print(tipoPedido);
-                                      print(envio);
+                                      //print(tipoPedido);
+                                      //print(envio);
                                       actualizarProviderPedido();
                                     });
                                   } else {
-                                    print('son mas de las 16');
+                                    //print('son mas de las 16');
                                     setState(() {
                                       tipoPedido = 'normal';
                                       light0 = false;

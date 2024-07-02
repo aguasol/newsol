@@ -69,15 +69,15 @@ class _LoginState extends State<Login> {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        print("data si hay bidon o no");
-        print(data);
+       // print("data si hay bidon o no");
+        //print(data);
         if (data == null) {
-          print("no hay dta");
+          //print("no hay dta");
           setState(() {
             bidonCliente.setBool('comproBidon', false);
           });
         } else {
-          print("si hay data");
+          //print("si hay data");
           setState(() {
             bidonCliente.setBool('comproBidon', true);
           });
@@ -109,13 +109,13 @@ class _LoginState extends State<Login> {
 
       if (user != null) {
         // El usuario ha iniciado sesión correctamente
-        print('Usuario autenticado: ${user.displayName}');
+       // print('Usuario autenticado: ${user.displayName}');
         return user;
       } else {
-        print('Error al iniciar sesión con Facebook');
+        //print('Error al iniciar sesión con Facebook');
       }
     } catch (e) {
-      print('Error al iniciar sesión con Facebook: $e');
+      //print('Error al iniciar sesión con Facebook: $e');
     }
   }
 
@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
         return user;
       }
     } catch (error) {
-      print("Esta aqui: $error");
+      //print("Esta aqui: $error");
       return null;
     }
   }
@@ -202,28 +202,28 @@ class _LoginState extends State<Login> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
 
   Future<dynamic> loginsol(username, password) async {
     try {
-      print("------loginsool");
-      print(username);
+      /*print("------loginsool");
+      print(username);*/
 
       var res = await http.post(Uri.parse(apiUrl + apiLogin),
           headers: {"Content-type": "application/json"},
           body: jsonEncode({"nickname": username, "contrasena": password}));
-      print("why");
-      print(res);
+      /*print("why");
+      print(res);*/
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
         // CLIENTE
 
         if (data['usuario']['rol_id'] == 4) {
-          print("dentro del cliente");
-          print("userDataCopy");
+          /*print("dentro del cliente");
+          print("userDataCopy");*/
           SharedPreferences userDataCopy =
               await SharedPreferences.getInstance();
           userDataCopy.setString('token', data['token']);
@@ -234,8 +234,8 @@ class _LoginState extends State<Login> {
               data['usuario']['saldo_beneficios'].toDouble() ?? 0.00);
           userDataCopy.setString(
               'codigoclientecopy', data['usuario']['codigo'] ?? 'Sin código');
-          print("codigo-----------------------------");
-          print(data['usuario']['codigo']);
+          /*print("codigo-----------------------------");
+          print(data['usuario']['codigo']);*/
           userDataCopy.setString('fechaCreacionCuentacopy',
               data['usuario']['fecha_creacion_cuenta']);
           userDataCopy.setString('sexocopy', data['usuario']['sexo']);
@@ -245,12 +245,12 @@ class _LoginState extends State<Login> {
               'quiereRetirarcopy', data['usuario']['quiereretirar']);
           userDataCopy.setString('suscripcioncopy',
               data['usuario']['suscripcion'] ?? 'Sin suscripción');
-          print(userDataCopy);
+          /*print(userDataCopy);
           print("-----------------------------------------------------------");
           print("cli");
           print("userData");
           // data['usuario']['nombre']
-          print(data['usuario']['id']);
+          print(data['usuario']['id']);*/
           await recargas(data['usuario']['id']);
          // await getBidonCliente(data['usuario']['id']);
           userData = UserModel(
@@ -268,8 +268,8 @@ class _LoginState extends State<Login> {
               token: data['token'],
               rolid: data['usuario']['rol_id'],
               recargas: numrecargas);
-          print(userData);
-          print("-----------------------------------------------------------");
+          /*print(userData);
+          print("-----------------------------------------------------------");*/
           setState(() {
             status = 200;
             rol = 4;
@@ -278,7 +278,7 @@ class _LoginState extends State<Login> {
         }
         //CONDUCTOR
         else if (data['usuario']['rol_id'] == 5) {
-          print("conductor");
+          //print("conductor");
           userData = UserModel(
               id: data['usuario']['id'],
               nombre: data['usuario']['nombres'],
@@ -293,7 +293,7 @@ class _LoginState extends State<Login> {
         }
         // GERENTE
         else if (data['usuario']['rol_id'] == 3) {
-          print("gerente");
+          //print("gerente");
           userData = UserModel(
               id: data['usuario']['id'],
               nombre: data['usuario']['nombre'],
@@ -312,18 +312,18 @@ class _LoginState extends State<Login> {
         SharedPreferences userPreference =
             await SharedPreferences.getInstance();
         userPreference.setInt("userID", id);
-        print(id);
+        //print(id);
       } else if (res.statusCode == 401) {
         var data400 = json.decode(res.body);
-        print("data400");
-        print(data400);
+        //print("data400");
+        //print(data400);
         setState(() {
           status = 401;
         });
       } else if (res.statusCode == 404) {
         var data404 = json.decode(res.body);
-        print("data 404");
-        print(data404);
+        //print("data 404");
+        //print(data404);
         setState(() {
           status = 404;
         });
@@ -336,15 +336,15 @@ class _LoginState extends State<Login> {
   }
 
   Future<dynamic> tieneUbicaciones(clienteID) async {
-    print("-------get ubicaciones---------");
-    print("$apiUrl/api/ubicacion/$clienteID");
+    //print("-------get ubicaciones---------");
+    //print("$apiUrl/api/ubicacion/$clienteID");
     var res = await http.get(
       Uri.parse("$apiUrl/api/ubicacion/$clienteID"),
       headers: {"Content-type": "application/json"},
     );
     try {
       if (res.statusCode == 200) {
-        print("-------entro al try de get ubicaciones---------");
+        //print("-------entro al try de get ubicaciones---------");
         var data = json.decode(res.body);
         List<UbicacionModel> tempUbicacion = data.map<UbicacionModel>((mapa) {
           return UbicacionModel(
@@ -359,7 +359,7 @@ class _LoginState extends State<Login> {
         }).toList();
         setState(() {
           if (tempUbicacion.isEmpty) {
-            print("${tempUbicacion.length}");
+            //print("${tempUbicacion.length}");
             //NOT TIENE UBIS
             yaTieneUbicaciones = false;
           } else {
@@ -369,22 +369,22 @@ class _LoginState extends State<Login> {
         });
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
 
   Future<dynamic> tienePedidos(clienteID) async {
-    print("-------get pedidossss---------");
+    //print("-------get pedidossss---------");
     var res = await http.get(
       Uri.parse(apiUrl + apiLastPedido + clienteID.toString()),
       headers: {"Content-type": "application/json"},
     );
     try {
       if (res.statusCode == 200) {
-        print("-------entro al try de get pedidossss---------");
+        //print("-------entro al try de get pedidossss---------");
         var data = json.decode(res.body);
-        print(data);
+        //print(data);
         if (data == null) {
           setState(() {
             noTienePedidosEsNuevo = true;
@@ -396,7 +396,7 @@ class _LoginState extends State<Login> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
@@ -574,8 +574,8 @@ class _LoginState extends State<Login> {
                           const EdgeInsets.only(top: 0, left: 20, right: 20),
                       child: ElevatedButton(
                         onPressed: () async {
-                          print(largoActual);
-                          print(anchoActual);
+                          /*print(largoActual);
+                          print(anchoActual);*/
                           if (_formKey.currentState!.validate()) {
                             showDialog(
                                 context: context,
@@ -608,7 +608,7 @@ class _LoginState extends State<Login> {
                                   }
                                   //SI YA TIENE UBICACIONES INGRESA DIRECTAMENTE A LA BARRA DE AVEGACION
                                   if (yaTieneUbicaciones == true) {
-                                    print("YA tiene unibicaciones");
+                                    //print("YA tiene unibicaciones");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -618,7 +618,7 @@ class _LoginState extends State<Login> {
                                     );
                                     //SI NO TIENE UBICACIONES INGRESA A UBICACION
                                   } else {
-                                    print("NO tiene unibicaciones");
+                                    //print("NO tiene unibicaciones");
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -675,8 +675,8 @@ class _LoginState extends State<Login> {
                                 );
                               }
                             } catch (e) {
-                              print(
-                                  "Excepción durante el inicio de sesión: $e");
+                              /*print(
+                                  "Excepción durante el inicio de sesión: $e");*/
                             }
                           }
                         },
@@ -705,8 +705,8 @@ class _LoginState extends State<Login> {
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       child: ElevatedButton(
                         onPressed: () {
-                          print(largoActual);
-                          print(anchoActual);
+                         // print(largoActual);
+                          //print(anchoActual);
 
                           Navigator.push(
                             context,

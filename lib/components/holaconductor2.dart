@@ -164,7 +164,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
         });
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
@@ -318,7 +318,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
         setState(() {});
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
@@ -334,25 +334,25 @@ class _HolaConductor2State extends State<HolaConductor2> {
     });
     socket.connect();
     socket.onConnect((_) {
-      print('Conexión establecida: CONDUCTOR');
+      //print('Conexión establecida: CONDUCTOR');
       // Inicia la transmisión de ubicación cuando se conecta
       //iniciarTransmisionUbicacion();
     });
     socket.onDisconnect((_) {
-      print('Conexión desconectada: CONDUCTOR');
+     // print('Conexión desconectada: CONDUCTOR');
     });
     socket.onConnectError((error) {
-      print("Error de conexión $error");
+      //print("Error de conexión $error");
     });
     socket.onError((error) {
-      print("Error de socket, $error");
+      //print("Error de socket, $error");
     });
     SharedPreferences rutaPreference = await SharedPreferences.getInstance();
     socket.on(
       'creadoRuta',
       (data) {
-        print("------esta es lA RUTA");
-        print(data['id']);
+        /*print("------esta es lA RUTA");
+        print(data['id']);*/
 
         setState(() {
           rutaID = data['id'];
@@ -392,7 +392,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
             "beneficiado_id": beneficiado,
           }));
     } else {
-      print('papas fritas');
+      //print('papas fritas');
     }
   }
 
@@ -446,11 +446,11 @@ class _HolaConductor2State extends State<HolaConductor2> {
           });
         }
       } catch (e) {
-        print('Error en la solicitud: $e');
+        //print('Error en la solicitud: $e');
         throw Exception('Error en la solicitud: $e');
       }
     } else {
-      print('papas');
+      //print('papas');
     }
   }
 
@@ -481,9 +481,9 @@ class _HolaConductor2State extends State<HolaConductor2> {
     final picturesDirectory = Directory(otro);
     if (!await picturesDirectory.exists()) {
       await picturesDirectory.create(recursive: true);
-      print('Directorio creado: $otro');
+      //print('Directorio creado: $otro');
     } else {
-      print('El directorio ya existe: $otro');
+      //print('El directorio ya existe: $otro');
     }
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
@@ -514,7 +514,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
         flag = false;
       });
 
-      print("Todavia no se ha tomado una foto");
+      //print("Todavia no se ha tomado una foto");
     }
   }
 
@@ -543,18 +543,18 @@ class _HolaConductor2State extends State<HolaConductor2> {
       if (await file.exists()) {
         // Eliminar el archivo
         await file.delete();
-        print('Foto eliminada con éxito: $fileName');
+        //print('Foto eliminada con éxito: $fileName');
       } else {
-        print('El archivo no existe: $fileName');
+        //print('El archivo no existe: $fileName');
       }
     } catch (e) {
-      print('Error al eliminar la foto: $e');
+      //print('Error al eliminar la foto: $e');
     }
   }
 
   void TomarFoto(double anchoActual, double largoActual, String dato) {
     _takePicture(dato);
-    print("Como esta el flag :=> $flag");
+    //print("Como esta el flag :=> $flag");
   }
 
   ubicacionExacta() async {
@@ -742,7 +742,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
                             if (await canLaunchUrl(url)) {
                               await launchUrl(url);
                             } else {
-                              print('no se puede llamar:(');
+                              //print('no se puede llamar:(');
                             }
                           },
                           style: ButtonStyle(
@@ -1344,8 +1344,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
                                                                 );
                                                               });
                                                         } else {
-                                                          print(
-                                                              "Todavia no se ha tomado una foto");
+                                                          //print("Todavia no se ha tomado una foto");
                                                         }
                                                         setState(() {
                                                           flag = false;
@@ -1428,8 +1427,7 @@ class _HolaConductor2State extends State<HolaConductor2> {
                                                                   ElevatedButton(
                                                                       onPressed:
                                                                           () async {
-                                                                        print(pedidoTrabajo
-                                                                            .id);
+                                                                        //print(pedidoTrabajo.id);
                                                                         await updateEstadoPedido(
                                                                             'entregado',
                                                                             null,
@@ -1656,8 +1654,8 @@ class _HolaConductor2State extends State<HolaConductor2> {
                                                             );
                                                           });
                                                     } else {
-                                                      print(
-                                                          "Todavia no se ha tomado una foto");
+                                                      /*print(
+                                                          "Todavia no se ha tomado una foto");*/
                                                     }
 
                                                     setState(() {

@@ -284,7 +284,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                     Provider.of<PedidoProvider>(
                                                         context,
                                                         listen: false);
-                                                print(
+                                                /*print(
                                                     "BIDON PRODUCT------------");
                                                 print(bidonProducto[0].id);
                                                 print("cantidad");
@@ -293,8 +293,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                 print(bidonProducto[0].nombre);
                                                 print(bidonProducto[0].precio);
                                                 print(bidonProducto[0].promoID);
-                                                print(bidonProducto[0]
-                                                    .cantidadRequeridaParaRuta);
+                                                print(bidonProducto[0].cantidadRequeridaParaRuta);*/
                                                 bidonProducto[0].cantidad = 1;
 
                                                 PedidoModel newPedido =
@@ -414,7 +413,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                                   Provider.of<PedidoProvider>(
                                                       context,
                                                       listen: false);
-                                              print("BIDON PRODUCT------------");
+                                              /*print("BIDON PRODUCT------------");
                                               print(bidonProducto[0].id);
                                               print("cantidad");
                                               print(bidonProducto[0].cantidad);
@@ -422,7 +421,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
                                               print(bidonProducto[0].precio);
                                               print(bidonProducto[0].promoID);
                                               print(bidonProducto[0]
-                                                  .cantidadRequeridaParaRuta);
+                                                  .cantidadRequeridaParaRuta);*/
                                               bidonProducto[0].cantidad = 1;
                                         
                                               PedidoModel newPedido = PedidoModel(
@@ -487,11 +486,11 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     SharedPreferences yasemostroPubli = await SharedPreferences.getInstance();
     // BIDON COMPRADO ?
     SharedPreferences bidonCliente = await SharedPreferences.getInstance();
-    print("prefrencias-----------");
+    //print("prefrencias-----------");
     setState(() {
       yaComproBidon = bidonCliente.getBool('comproBidon');
     });
-    print(yaComproBidon);
+    //print(yaComproBidon);
     if (yasemostroPubli.getBool("ya") != null) {
       setState(() {
         yaSeMostro = yasemostroPubli.getBool("ya");
@@ -513,12 +512,12 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        print("data si hay bidon o no");
-        print(data);
+        //print("data si hay bidon o no");
+        //print(data);
         bool compre = false;
         if (data == null) {
-          print("no hay data");
-          print("no compre");
+          //print("no hay data");
+          //print("no compre");
            if (mounted) {
           setState(() {
             compre = false;
@@ -526,7 +525,7 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
         }
           return compre;
         } else {
-          print("compre");
+         // print("compre");
           if (mounted) {
           setState(() {
             compre = true;
@@ -552,26 +551,26 @@ class _HolaState extends State<Hola2> with TickerProviderStateMixin {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     bool compreBidon = await getBidonCliente(userProvider.user?.id);
-    print("numerito ${compreBidon}");
+    //print("numerito ${compreBidon}");
 
-    print("..widget nuevo");
-    print(widget.esNuevo);
-    print("...YASEMOSTRO");
-    print(yaSeMostro);
-    print("ya compro");
-    print(compreBidon);
+    //print("..widget nuevo");
+    //print(widget.esNuevo);
+    //print("...YASEMOSTRO");
+    //print(yaSeMostro);
+    //print("ya compro");
+    //print(compreBidon);
 if (!mounted) return;
     if (widget.esNuevo == true && compreBidon == false) {
-      print(".....ENTRANDO Y LLAMANDO.........");
-      print("...todavia");
+      //print(".....ENTRANDO Y LLAMANDO.........");
+      //print("...todavia");
 
       await muestraDialogoPubli(context);
     } else if (widget.esNuevo == false && compreBidon == false) {
-      print("...todavia");
+      //print("...todavia");
 
       await muestraDialogoPubli(context);
     } else if (widget.esNuevo == false && compreBidon == true) {
-      print("ya compre");
+      //print("ya compre");
     }
     if (compreBidon == true) {
       if (!mounted) return;
@@ -579,8 +578,8 @@ if (!mounted) return;
       setState(() {
         userProvider.user?.esNuevo = false;
       });
-      print("-----PROVIDER USER");
-      print(userProvider.user?.esNuevo);
+      //print("-----PROVIDER USER");
+      //print(userProvider.user?.esNuevo);
     }
   }
 
@@ -711,7 +710,7 @@ if (!mounted) return;
     );
     try {
       if (res.statusCode == 200) {
-        print("2) entro al try de get ubicaciones---------");
+        //print("2) entro al try de get ubicaciones---------");
         var data = json.decode(res.body);
         List<UbicacionModel> tempUbicacion = data.map<UbicacionModel>((mapa) {
           return UbicacionModel(
@@ -801,7 +800,7 @@ if (!mounted) return;
     } catch (e) {
       //throw Exception("Error ${e}");
       // Manejo de errores, puedes mostrar un mensaje al usuario indicando que hubo un problema al obtener la ubicación.
-      print("Error al obtener la ubicación: $e");
+      //print("Error al obtener la ubicación: $e");
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -854,7 +853,7 @@ if (!mounted) return;
   }
 
   Future<void> currentLocation() async {
-    print("¡¡Entro al CurrectLocation!!");
+    //print("¡¡Entro al CurrectLocation!!");
     var location = location_package.Location();
     location_package.PermissionStatus permissionGranted;
     location_package.LocationData locationData;
@@ -905,7 +904,7 @@ if (!mounted) return;
       // Aquí puedes utilizar la ubicación obtenida (locationData)
     } catch (e) {
       // Manejo de errores, puedes mostrar un mensaje al usuario indicando que hubo un problema al obtener la ubicación.
-      print("Error al obtener la ubicación: $e");
+      //print("Error al obtener la ubicación: $e");
     }
   }
 

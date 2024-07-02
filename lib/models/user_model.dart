@@ -54,11 +54,11 @@ class UserModel {
 
     // Formatea la fecha y hora actuales al formato deseado
     String formattedDate = dateFormat.format(time);
-    print("json------------------------------");
+    /*print("json------------------------------");
     print(json);
-    print("usuario json--------------------");
+    print("usuario json--------------------");*/
     var usuario = json['usuario'];
-    print(usuario);
+    //print(usuario);
     /*
     if (usuario == null) {
       // Manejar el caso donde 'usuario' es null

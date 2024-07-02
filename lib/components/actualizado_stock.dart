@@ -123,7 +123,7 @@ class _ActualizadoStockState extends State<ActualizadoStock> {
         throw Exception('Error en la solicitud: $e');
       }
     } else {
-      print('no corrriooo');
+      //print('no corrriooo');
     }
   }
 
@@ -167,7 +167,7 @@ class _ActualizadoStockState extends State<ActualizadoStock> {
         throw Exception('Error en la solicitud: $e');
       }
     } else {
-      print('no corrrioooooo');
+      //print('no corrrioooooo');
     }
   }
 
@@ -535,7 +535,7 @@ class _ActualizadoStockState extends State<ActualizadoStock> {
                       SizedBox(
                           child: ElevatedButton(
                               onPressed: () async {
-                                print("YAAAAAAAAAAAAAAAAA");
+                               // print("YAAAAAAAAAAAAAAAAA");
                                 for (var i = 0; i < listProducto.length; i++) {
                                   var cantidad =
                                       listProducto[i].cantidadStock.text;
@@ -575,7 +575,7 @@ class _ActualizadoStockState extends State<ActualizadoStock> {
                                           "actualizado", true);
                                     }
                                   }
-                                  print("PASARRRR");
+                                  //print("PASARRRR");
                                   Navigator.push(
                                     // ignore: use_build_context_synchronously
                                     context,

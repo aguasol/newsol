@@ -13,12 +13,12 @@ class UserProvider extends ChangeNotifier {
     // Intentar cargar el usuario desde SharedPreferences cuando se crea el proveedor
   }
   Future<void> initUser() async {
-    print("1.2 -------------- init");
+    //print("1.2 -------------- init");
     await _loadUserFromPrefs();
   }
 
   Future<void> _saveUserToPrefs(UserModel user) async {
-    print("2.1----------------------------------save user");
+    //print("2.1----------------------------------save user");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userJson = jsonEncode(user.toJson());
     await prefs.setString('user', userJson);
@@ -26,17 +26,17 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> updateUser(UserModel newUser) async {
     _user = newUser;
-    print("1.1 -------------------------------update User");
+    //print("1.1 -------------------------------update User");
     await _saveUserToPrefs(newUser);
     notifyListeners();
   }
 
   Future<void> _loadUserFromPrefs() async {
-    print("2.2-------------------------------load User");
+    //print("2.2-------------------------------load User");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userJson = prefs.getString('user');
-    print("user json------------------------");
-    print(userJson);
+    //print("user json------------------------");
+    //print(userJson);
     if (userJson != null) {
       _user = UserModel.fromJson(jsonDecode(userJson));
       notifyListeners();

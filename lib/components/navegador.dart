@@ -55,15 +55,15 @@ class _BarraNavegacion extends State<BarraNavegacion> {
       const Icon(Icons.person, color: Colors.white),
       const Icon(Icons.assignment_rounded, color: Colors.white),
     ];
-    print('------  INICIALIZADOOO ------------');
+    /*print('------  INICIALIZADOOO ------------');
     print('------  INDICEEEE');
     print(indexSelecionado);
     print('------SUBINDICE');
-    print(subIndex);
+    print(subIndex);*/
 
     //ESTAS TRES LINEASSSS SON DE LUIS >:p
     if (subIndex > screens[indexSelecionado].length - 1) {
-      print('es mayor');
+      //print('es mayor');
       subIndex = 0;
     }
     //SOLO UNA IDEA NADA DE CODIGO
@@ -81,11 +81,11 @@ class _BarraNavegacion extends State<BarraNavegacion> {
             setState(() {
               subIndex = 0;
               indexSelecionado = index;
-              print('------  onTAPP ------------');
+              /*print('------  onTAPP ------------');
               print('------  INDICEEEE');
               print(indexSelecionado);
               print('------SUBINDICE');
-              print(subIndex);
+              print(subIndex);*/
             });
           },
           index: indexSelecionado,

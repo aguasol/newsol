@@ -83,34 +83,34 @@ class _PermisoState extends State<Permiso> {
   }
 
   Future puntoEnPoligono(double? xA, double? yA) async {
+    /*print('----------------------------------------');
     print('----------------------------------------');
-    print('----------------------------------------');
-    print('¡¡ENTRO A PUNTO EN POLIGONO!!');
+    print('¡¡ENTRO A PUNTO EN POLIGONO!!');*/
     if (xA is double && yA is double) {
-      print('1) son double, se recorre las zonas');
+      //print('1) son double, se recorre las zonas');
       for (var i = 0; i < listZonas.length; i++) {
         var zonaID = listZonas[i].id;
-        print('zonaID = $zonaID');
+        //print('zonaID = $zonaID');
         mapaLineasZonas[zonaID].forEach((value, mapaLinea) {
-          print('Ingreso a recorrer las lineas de la zona $zonaID');
+          //print('Ingreso a recorrer las lineas de la zona $zonaID');
           if (xA <= mapaLinea["maxX"] &&
               mapaLinea['minY'] <= yA &&
               yA <= mapaLinea['maxY']) {
-            print('- Cumple todas estas');
+            /*print('- Cumple todas estas');
             print('- $xA <= ${mapaLinea["maxX"]}');
             print('- ${mapaLinea['minY']} <= $yA');
             print('- $yA<= ${mapaLinea['maxY']}');
-            print('');
+            print('');*/
             var xInterseccion =
                 (yA - mapaLinea['constante']) / mapaLinea['pendiente'];
-            print('Se calcula la xInterseccion');
-            print(
-                'xI = ($yA - ${mapaLinea['constante']})/${mapaLinea['pendiente']} = $xInterseccion');
+           // print('Se calcula la xInterseccion');
+            /*print(
+                'xI = ($yA - ${mapaLinea['constante']})/${mapaLinea['pendiente']} = $xInterseccion');*/
             if (xA <= xInterseccion) {
               //EL PUNTO INTERSECTA A LA LINEA
-              print('- el punto intersecta la linea hacia la deresha');
+              /*print('- el punto intersecta la linea hacia la deresha');
               print('- $xA <= $xInterseccion');
-              print('');
+              print('');*/
               setState(() {
                 mapaLinea['intersecciones'] = 1;
               });
@@ -121,11 +121,11 @@ class _PermisoState extends State<Permiso> {
       //SE CUENTA LA CANTIDAD DE INTERSECCIONES EN CADA ZONA
       for (var i = 0; i < listZonas.length; i++) {
         //se revisa para cada zona
+        /*print('');
         print('');
-        print('');
-        print('Ahora se cuenta la cantidad de intersecciones');
+        print('Ahora se cuenta la cantidad de intersecciones');*/
         var zonaID = listZonas[i].id;
-        print('Primero en la zona $zonaID');
+        //print('Primero en la zona $zonaID');
         int intersecciones = 0;
         mapaLineasZonas[zonaID].forEach((key, mapaLinea) {
           if (mapaLinea['intersecciones'] == 1) {
@@ -133,15 +133,15 @@ class _PermisoState extends State<Permiso> {
           }
         });
         if (intersecciones > 0) {
-          print('Nª intersecciones = $intersecciones en la Zona $zonaID');
+          //print('Nª intersecciones = $intersecciones en la Zona $zonaID');
           if (intersecciones % 2 == 0) {
-            print('- Es una cantidad PAR, ESTA AFUERA');
+            //print('- Es una cantidad PAR, ESTA AFUERA');
             setState(() {
               zonaIDUbicacion = null;
             });
           } else {
             setState(() {
-              print('- Es una cantidad IMPAR, ESTA DENTRO');
+              //print('- Es una cantidad IMPAR, ESTA DENTRO');
               zonaIDUbicacion = zonaID;
               print(zonaIDUbicacion);
             });
@@ -149,11 +149,11 @@ class _PermisoState extends State<Permiso> {
             break;
           }
         } else {
-          print('No tiene intersecciones');
+          //print('No tiene intersecciones');
           setState(() {
             zonaIDUbicacion = null;
           });
-          print('');
+          //print('');
         }
       }
     }
@@ -174,8 +174,8 @@ class _PermisoState extends State<Permiso> {
       } else {
         direccion = "Default";
       }
-      print("x-----y");
-      print("${x},${y}");
+      /*print("x-----y");
+      print("${x},${y}");*/
       await puntoEnPoligono(x, y);
     } catch (e) {
       //throw Exception("Error ${e}");
@@ -189,7 +189,7 @@ class _PermisoState extends State<Permiso> {
               'Error de Ubicación',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
             ),
-            content: Text(
+            content: const Text(
               'Hubo un problema al obtener la ubicación. Por favor, inténtelo de nuevo.',
               style: TextStyle(fontSize: 16),
             ),
@@ -216,7 +216,7 @@ class _PermisoState extends State<Permiso> {
         latitudUser = x;
         longitudUser = y;
         _isloading = false;
-        print('esta es la zonaID $zonaIDUbicacion');
+        //print('esta es la zonaID $zonaIDUbicacion');
         creadoUbicacion(clienteID, distrito);
         if (zonaIDUbicacion == null) {
           setState(() {
@@ -314,17 +314,17 @@ class _PermisoState extends State<Permiso> {
       //updateLocation(locationData);
       await obtenerDireccion(locationData.latitude, locationData.longitude);
 
-      print("----ubicación--");
-      print(locationData);
-      print("----latitud--");
+     // print("----ubicación--");
+      //print(locationData);
+      //print("----latitud--");
       //print(latitudUser);
-      print("----longitud--");
+      //print("----longitud--");
       //print(longitudUser);
 
       // Aquí puedes utilizar la ubicación obtenida (locationData)
     } catch (e) {
       // Manejo de errores, puedes mostrar un mensaje al usuario indicando que hubo un problema al obtener la ubicación.
-      print("Error al obtener la ubicación: $e");
+      //print("Error al obtener la ubicación: $e");
     }
   }
 

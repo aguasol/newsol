@@ -151,12 +151,12 @@ class _HolaConductorState extends State<HolaConductor> {
       });
     }
     if (fechaFinalizado.getString("fecha") != null) {
-      print("si hay fecha en pref-----------------------------------------");
+      //print("si hay fecha en pref-----------------------------------------");
       setState(() {
         fechaFinalizadoPref = mesyAnio(fechaFinalizado.getString("fecha"));
       });
     } else {
-      print("no hay fecha en pref--------------------------------------------");
+      //print("no hay fecha en pref--------------------------------------------");
       setState(() {
         fechaFinalizadoPref =
             DateTime.now().subtract(const Duration(hours: 50));
@@ -186,10 +186,10 @@ class _HolaConductorState extends State<HolaConductor> {
             nombreVehiculo: data['nombre_modelo'],
             placaVehiculo: data['placa']);
         DateTime fechaCreacion = DateTime.parse(tempRutaModel.fechaCreacion);
-        print("ruta del dia-------------------------------------");
+        /*print("ruta del dia-------------------------------------");
         print(fechaCreacion);
         print("id de ruta----------------------------------------------");
-        print(tempRutaModel.id);
+        print(tempRutaModel.id);*/
         if (fechaCreacion.day == fechaHoy.day &&
             fechaCreacion.month == fechaHoy.month &&
             fechaCreacion.year == fechaHoy.year) {
@@ -210,10 +210,10 @@ class _HolaConductorState extends State<HolaConductor> {
           if (fechaCreacion.day == fechaFinalizadoPref.day &&
               fechaCreacion.month == fechaFinalizadoPref.month &&
               fechaCreacion.year == fechaFinalizadoPref.year) {
-            print("rutaID-----------------------------------------------");
+            /*print("rutaID-----------------------------------------------");
             print("$rutaID, $rutaIDpref");
             print("fechaaa---------------------------------------------");
-            print(fechaFinalizadoPref);
+            print(fechaFinalizadoPref);*/
             if (fechaCreacion.hour == fechaFinalizadoPref.hour) {
               if (fechaCreacion.minute < fechaFinalizadoPref.minute) {
                 if (descargaste == false) {
@@ -237,7 +237,7 @@ class _HolaConductorState extends State<HolaConductor> {
             }
             //SIGNIFICA QUE LA RUTA YA SE TERMINO HOY
           } else {
-            print("aqui------------------------------------");
+            //print("aqui------------------------------------");
             //la ruta no se ha terminado hoyyyy
             setState(() {
               descargaste = false;
@@ -252,7 +252,7 @@ class _HolaConductorState extends State<HolaConductor> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
@@ -268,18 +268,18 @@ class _HolaConductorState extends State<HolaConductor> {
     });
     socket.connect();
     socket.onConnect((_) {
-      print('Conexión establecida: CONDUCTOR');
+      //print('Conexión establecida: CONDUCTOR');
       // Inicia la transmisión de ubicación cuando se conecta
       //iniciarTransmisionUbicacion();
     });
     socket.onDisconnect((_) {
-      print('Conexión desconectada: CONDUCTOR');
+      //print('Conexión desconectada: CONDUCTOR');
     });
     socket.onConnectError((error) {
-      print("Error de conexión $error");
+      //print("Error de conexión $error");
     });
     socket.onError((error) {
-      print("Error de socket, $error");
+      //print("Error de socket, $error");
     });
     SharedPreferences rutaPreference = await SharedPreferences.getInstance();
     SharedPreferences rutaFinalizada = await SharedPreferences.getInstance();
@@ -442,8 +442,8 @@ class _HolaConductorState extends State<HolaConductor> {
                               ? ElevatedButton(
                                   onPressed: () {
                                     if (rutaTerminadaPref) {
-                                      print("idpedidos---------------------");
-                                      print(finalidpedidos);
+                                      //print("idpedidos---------------------");
+                                      //print(finalidpedidos);
                                       //SI YA TERMINO LA RUTAAAA
                                       Navigator.push(
                                         context,

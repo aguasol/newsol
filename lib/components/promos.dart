@@ -46,14 +46,14 @@ class _PromosState extends State<Promos> {
   }
 
   Future<void> _initialize() async {
-    print('1) INITIALIZE-------------');
+    //print('1) INITIALIZE-------------');
     await getTodosProductoPromocion();
     await getProducts();
     await getPromociones();
   }
 
   Future<dynamic> getTodosProductoPromocion() async {
-    print("--------------get productos promos----");
+    //print("--------------get productos promos----");
     var res = await http.get(
       Uri.parse(apiUrl + apiProdProm),
       headers: {"Content-type": "application/json"},
@@ -76,13 +76,13 @@ class _PromosState extends State<Promos> {
         });
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
 
   Future<dynamic> getProducts() async {
-    print("---------------get productos-----------------------");
+    //print("---------------get productos-----------------------");
     var res = await http.get(
       Uri.parse("$apiUrl/api/products"),
       headers: {"Content-type": "application/json"},
@@ -110,13 +110,13 @@ class _PromosState extends State<Promos> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
 
   Future<dynamic> getPromociones() async {
-    print("---------------get promos ----------------");
+    //print("---------------get promos ----------------");
     var res = await http.get(
       Uri.parse('$apiUrl/api/promocion'),
       headers: {"Content-type": "application/json"},
@@ -156,15 +156,15 @@ class _PromosState extends State<Promos> {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
 
 //este nel PASTEL
   void obtenerPromos() {
-    print("-------------------------");
-    print("obtiene PRODUCTOS");
+    /*print("-------------------------");
+    print("obtiene PRODUCTOS");*/
 
     List<Promo> listTemp = promosProvider +
         listPromociones.where((promocion) => promocion.cantidad > 0).toList();
@@ -197,9 +197,9 @@ class _PromosState extends State<Promos> {
       almenosUno = true;
       listPromociones[index].cantidad++;
     });
-    print("esta es la listA PROMOCIONES");
+    /*print("esta es la listA PROMOCIONES");
     print(listPromociones[index].cantidad);
-    print("esta es la PROMOCIONES CONTABILIZADAS");
+    print("esta es la PROMOCIONES CONTABILIZADAS");*/
   }
 
   void disminuir(int index) {
@@ -210,7 +210,7 @@ class _PromosState extends State<Promos> {
     }
     almenosUno =
         listPromociones.where((promo) => promo.cantidad > 0).isNotEmpty;
-    print(listPromociones[index].cantidad);
+    //print(listPromociones[index].cantidad);
   }
 
   double obtenerTotal() {
@@ -227,7 +227,7 @@ class _PromosState extends State<Promos> {
 
   void esVacio(PedidoModel? pedido) {
     if (pedido is PedidoModel) {
-      print('ES PEDIDOOO');
+      //print('ES PEDIDOOO');
       productosProvider = pedido.seleccionados;
       //COMO HACER AHHHHH
       promosProvider = pedido.seleccionadosPromo;
@@ -245,7 +245,7 @@ class _PromosState extends State<Promos> {
         });
       }
     } else {
-      print('no es pedido');
+      //print('no es pedido');
       setState(() {
         cantCarrito = 0;
         productosProvider = [];
@@ -466,8 +466,8 @@ class _PromosState extends State<Promos> {
                                                 onPressed: () {
                                                   setState(() {
                                                     disminuir(index);
-                                                    print(
-                                                        "disminuir ${promocion.cantidad}");
+                                                    /*print(
+                                                        "disminuir ${promocion.cantidad}");*/
                                                   });
                                                 },
                                                 iconSize: largoActual * 0.041,
@@ -493,8 +493,8 @@ class _PromosState extends State<Promos> {
                                                 onPressed: () {
                                                   setState(() {
                                                     incrementar(index);
-                                                    print(
-                                                        "incrementar ${promocion.cantidad}");
+                                                    /*print(
+                                                        "incrementar ${promocion.cantidad}");*/
                                                   });
                                                 },
                                                 iconSize: largoActual * 0.041,

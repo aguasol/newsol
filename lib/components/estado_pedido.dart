@@ -154,7 +154,7 @@ class _EstadoPedido extends State<EstadoPedido> with TickerProviderStateMixin {
         }
       }
     } catch (e) {
-      print('Error en la solicitud: $e');
+      //print('Error en la solicitud: $e');
       throw Exception('Error en la solicitud: $e');
     }
   }
